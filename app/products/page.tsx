@@ -4,13 +4,11 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import ProductQueryModal from "@/components/product-query-modal"
 import ProductDetailModal from "@/components/product-detail-modal"
 
 export default function ProductsPage() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [isProductQueryOpen, setIsProductQueryOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
@@ -199,7 +197,7 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header onProductQuery={() => setIsProductQueryOpen(true)} />
+      <Header />
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
@@ -348,7 +346,6 @@ export default function ProductsPage() {
       <Footer />
 
       {/* Modals */}
-      <ProductQueryModal isOpen={isProductQueryOpen} onClose={() => setIsProductQueryOpen(false)} />
       <ProductDetailModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </div>
   )

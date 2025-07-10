@@ -4,11 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
 
-interface HeaderProps {
-  onProductQuery: () => void
-}
-
-export default function Header({ onProductQuery }: HeaderProps) {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
@@ -103,17 +99,6 @@ export default function Header({ onProductQuery }: HeaderProps) {
                 {item.name}
               </motion.button>
             ))}
-
-            {/* Product Query Button */}
-            <motion.button
-              onClick={onProductQuery}
-              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all text-sm font-medium shadow-lg"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <i className="fas fa-search mr-2"></i>
-              Product Query
-            </motion.button>
           </nav>
         </div>
       </div>
