@@ -38,7 +38,7 @@ export const news: NewsItem[] = [
       category: "products",
       categoryName: "Product Updates",
       image: "/image/news/news-2020-05-18-01.jpg",
-      gradient: "from-blue-700 to-sky-600", // Using a blue gradient for a professional look.
+      gradient: "from-transparent to-transparent",
       readTime: "4 min read",
       author: "Engineering Team",
       featured: true, // As the only item, it should be featured.
@@ -76,6 +76,33 @@ export const news: NewsItem[] = [
           </ol>
 
           <p>With mass production already underway, Xiamen Union Spares Ltd. is positioned to supply global markets with a high-quality, reliable EMD645 cylinder head that meets the exacting standards of the original equipment manufacturer.</p>
+        </div>
+      `,
+  },
+  {
+      id: 2,
+      title: "Successful Production Development of New Camshaft Models",
+      excerpt: "Based on client drawings and samples, we have successfully developed and completed the first production batch of several new camshaft models under the guidance of our engineering team.",
+      date: "2020-03-23",
+      category: "products",
+      categoryName: "Product Updates",
+      image: "/image/news/2020-03-23-01.jpg",
+      gradient: "from-transparent to-transparent",
+      readTime: "2 min read",
+      author: "Production Department",
+      featured: false,
+      tags: ["Camshaft", "Custom Manufacturing", "Product Development"],
+      gallery: [
+        "/image/news/2020-03-23-02.jpg",
+        "/image/news/2020-03-23-03.jpg",
+        "/image/news/2020-03-23-04.jpg",
+      ],
+      contentImages: [],
+      content: `
+        <div class="prose max-w-none">
+          <p>We are pleased to announce the successful production development for several new types of camshafts. This achievement highlights our capability in custom manufacturing based on specific client requirements.</p>
+          <p>The entire development and production process was based on detailed drawings and physical samples provided by our client, with every stage closely guided by our experienced engineering team to ensure precision and quality.</p>
+          <p>The first production batch has now been completed, passed all quality assurance checks, and is being prepared for shipment to our client. We look forward to continuing to support our partners with high-quality, custom-engineered components.</p>
         </div>
       `,
   },
