@@ -1,27 +1,24 @@
-"use client"
-import { motion, useScroll, useTransform } from "framer-motion"
+import dynamic from 'next/dynamic'
 import Header from "@/components/header"
-import HeroBanner from "@/components/hero-banner"
-import ProductOverview from "@/components/product-overview"
-import AboutSection from "@/components/about-section"
-import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
+import { Skeleton } from "@/components/ui/skeleton" // Optional: for a nice loading state
+
+// Dynamically import the client component with SSR turned off
+const HomeContent = dynamic(() => import('@/components/home-content'), { 
+  ssr: false,
+  // Optional: Show a loading skeleton while the component loads on the client
+  loading: () => (
+    <main className="p-4">
+      <Skeleton className="h-[60vh] w-full" />
+    </main>
+  )
+})
 
 export default function HomePage() {
-  const { scrollYProgress } = useScroll()
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8])
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <main>
-        <motion.div style={{ opacity }}>
-          <HeroBanner />
-        </motion.div>
-        <ProductOverview />
-        <AboutSection />
-        <ContactSection />
-      </main>
+      <HomeContent />
       <Footer />
     </div>
   )
