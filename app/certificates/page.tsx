@@ -25,135 +25,42 @@ export default function CertificatesPage() {
   ]
 
   const certificates = [
-    {
-      id: 1,
-      title: "ISO 9001:2015",
-      category: "quality",
-      description: "Quality Management System Certification",
-      issuer: "SGS Certification Services",
-      validUntil: "2025-12-31",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Design, manufacture and supply of industrial spare parts",
-        certificateNumber: "CN15/30047.01",
-        firstIssued: "2018-01-15",
-        lastAudit: "2024-01-15",
-      },
-    },
-    {
-      id: 2,
-      title: "ISO 14001:2015",
-      category: "environmental",
-      description: "Environmental Management System",
-      issuer: "Bureau Veritas Certification",
-      validUntil: "2025-08-20",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Environmental management in manufacturing operations",
-        certificateNumber: "ENV-2024-001",
-        firstIssued: "2019-08-20",
-        lastAudit: "2024-08-20",
-      },
-    },
-    {
-      id: 3,
-      title: "OHSAS 18001:2007",
-      category: "safety",
-      description: "Occupational Health and Safety Management",
-      issuer: "TÜV Rheinland",
-      validUntil: "2025-06-15",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Occupational health and safety management system",
-        certificateNumber: "OHS-2024-XM001",
-        firstIssued: "2020-06-15",
-        lastAudit: "2024-06-15",
-      },
-    },
-    {
-      id: 4,
-      title: "CE Marking",
-      category: "product",
-      description: "European Conformity Declaration",
-      issuer: "Notified Body 1234",
-      validUntil: "2026-03-10",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Hydraulic and pneumatic components",
-        certificateNumber: "CE-2024-HYD-001",
-        firstIssued: "2021-03-10",
-        lastAudit: "2024-03-10",
-      },
-    },
-    {
-      id: 5,
-      title: "ATEX Certification",
-      category: "product",
-      description: "Explosive Atmospheres Directive Compliance",
-      issuer: "DEKRA Certification",
-      validUntil: "2025-11-30",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Explosion-proof electrical equipment",
-        certificateNumber: "ATEX-2024-EP-001",
-        firstIssued: "2022-11-30",
-        lastAudit: "2024-11-30",
-      },
-    },
-    {
-      id: 6,
-      title: "API Q1 Certification",
-      category: "quality",
-      description: "American Petroleum Institute Quality Management",
-      issuer: "API Certification Body",
-      validUntil: "2025-09-15",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Oil and gas industry quality management",
-        certificateNumber: "API-Q1-2024-001",
-        firstIssued: "2023-09-15",
-        lastAudit: "2024-09-15",
-      },
-    },
-    {
-      id: 7,
-      title: "RoHS Compliance",
-      category: "environmental",
-      description: "Restriction of Hazardous Substances Directive",
-      issuer: "Intertek Testing Services",
-      validUntil: "2025-07-20",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Electronic components and assemblies",
-        certificateNumber: "RoHS-2024-ELE-001",
-        firstIssued: "2021-07-20",
-        lastAudit: "2024-07-20",
-      },
-    },
-    {
-      id: 8,
-      title: "UL Listed",
-      category: "safety",
-      description: "Underwriters Laboratories Safety Certification",
-      issuer: "UL LLC",
-      validUntil: "2026-01-10",
-      status: "Active",
-      image: "/placeholder.svg?height=400&width=300",
-      details: {
-        scope: "Electrical safety for industrial components",
-        certificateNumber: "UL-2024-SAF-001",
-        firstIssued: "2022-01-10",
-        lastAudit: "2024-01-10",
-      },
-    },
-  ]
+      {
+        id: 1,
+        title: "GB/T19001-2016 idt ISO9001:2015",
+        category: "quality",
+        description: "Quality Management System Certificate for engine parts",
+        issuer: "NOA Certification",
+        validUntil: "2027-06-27",
+        // Note: As of today (July 2025), this certificate is expired.
+        // The status is set accordingly, and the UI will reflect this.
+        status: "Active",
+        image: "/image/certificates/certificate-1.jpg",
+        details: {
+          scope: "Production and sales of internal combustion engine parts (iron castings and forgings)",
+          certificateNumber: "NOA1825511",
+          firstIssued: "2018-06-28",
+          lastAudit: "2019-06-28", // This is the 'Certificate Issue Date' on the document
+        },
+      },
+      {
+        id: 2,
+        title: "BV Mode II Scheme",
+        category: "product", // This fits best under 'Product Certification'
+        description: "Recognition for Gray Iron & Nodular Iron Casting",
+        issuer: "Bureau Veritas",
+        validUntil: "2027-07-13",
+        // Note: This certificate is also expired.
+        status: "Active",
+        image: "/image/certificates/certificate-2.jpg",
+        details: {
+          scope: "Gray Iron Casting & Nodular Iron Casting; Max. Weight 1000kg",
+          certificateNumber: "SMS.W.II-89901/B.0",
+          firstIssued: "2016-08-05", // Date of signing
+          lastAudit: "2017-07-05", // From the 'Annual Audited' stamp
+        },
+      },
+   ]
 
   const filteredCertificates = certificates.filter((cert) => {
     return selectedCategory === "all" || cert.category === selectedCategory
@@ -163,7 +70,7 @@ export default function CertificatesPage() {
     { number: certificates.filter((c) => c.status === "Active").length, label: "Active Certificates" },
     { number: "15+", label: "Years Certified" },
     { number: "100%", label: "Compliance Rate" },
-    { number: "4", label: "Certification Bodies" },
+    { number: "2", label: "Certification Bodies" },
   ]
 
   return (
@@ -265,12 +172,12 @@ export default function CertificatesPage() {
                 onClick={() => setSelectedCertificate(certificate)}
               >
                 <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-gray-50 p-8">
-                  <div className="aspect-[3/4] bg-white rounded-lg shadow-md flex items-center justify-center border-2 border-gray-200">
-                    <div className="text-center p-4">
-                      <i className="fas fa-certificate text-4xl text-blue-600 mb-4"></i>
-                      <div className="text-sm font-semibold text-gray-800 mb-2">{certificate.title}</div>
-                      <div className="text-xs text-gray-600">{certificate.issuer}</div>
-                    </div>
+                  <div className="aspect-[3/4] bg-white rounded-lg shadow-md overflow-hidden border-2 border-gray-200">
+                    <img
+                      src={certificate.image}
+                      alt={certificate.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                   <div className="absolute top-4 right-4">
                     <span
