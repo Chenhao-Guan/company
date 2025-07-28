@@ -1,9 +1,10 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
+import type { Product } from "@/data/products"
 
 interface ProductDetailModalProps {
-  product: any
+  product: Product | null
   onClose: () => void
 }
 
@@ -29,7 +30,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
 
         {/* Modal */}
         <motion.div
-          className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+          className="relative bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -38,8 +39,8 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">{product.title}</h2>
-              <p className="text-gray-600 mt-1">{product.description}</p>
+              <h2 className="text-3xl font-bold text-gray-900">{product.title}</h2>
+              <p className="text-gray-600 mt-2 text-lg">{product.description}</p>
             </div>
             <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
               <i className="fas fa-times text-xl text-gray-500"></i>
@@ -49,8 +50,9 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
           {/* Content */}
           <div className="p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Product Image */}
-              <div className="relative">
+              {/* Product Images */}
+              <div className="space-y-4">
+                {/* Main Image */}
                 <div className="aspect-square rounded-2xl overflow-hidden relative">
                   <img
                     src={product.image || "/placeholder.svg"}
@@ -62,32 +64,60 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                     <i className={`${product.icon} text-8xl text-white`}></i>
                   </div>
                 </div>
+
+                {/* Gallery */}
+                {product.gallery && product.gallery.length > 0 && (
+                  <div className="grid grid-cols-3 gap-2">
+                    {product.gallery.map((image, index) => (
+                      <div key={index} className="aspect-square rounded-lg overflow-hidden">
+                        <img
+                          src={image || "/placeholder.svg"}
+                          alt={`${product.title} ${index + 1}`}
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Product Details */}
               <div className="space-y-6">
-                {/* Price */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Pricing</h3>
-                  <div className="text-2xl font-bold text-blue-600">{product.price}</div>
-                </div>
+                {/* Description */}
+                {product.detailedDescription && (
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">Product Overview</h3>
+                    <p className="text-gray-700 leading-relaxed">{product.detailedDescription}</p>
+                  </div>
+                )}
 
-                {/* Specifications */}
+                {/* Technical Specifications */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Technical Specifications</h3>
-                  <ul className="space-y-2">
-                    {product.specifications.map((spec, index) => (
-                      <li key={index} className="flex items-center text-gray-600">
-                        <i className="fas fa-check text-green-500 mr-3"></i>
-                        {spec}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Technical Specifications</h3>
+                  {product.technicalSpecs ? (
+                    <div className="space-y-3">
+                      {Object.entries(product.technicalSpecs).map(([key, value]) => (
+                        <div key={key} className="flex justify-between items-center py-2 border-b border-gray-100">
+                          <span className="font-medium text-gray-600">{key}:</span>
+                          <span className="text-gray-900">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul className="space-y-2">
+                      {product.specifications.map((spec, index) => (
+                        <li key={index} className="flex items-center text-gray-600">
+                          <i className="fas fa-check text-green-500 mr-3"></i>
+                          {spec}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 {/* Applications */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Applications</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Applications</h3>
                   <div className="flex flex-wrap gap-2">
                     {product.applications.map((app, index) => (
                       <span
@@ -102,7 +132,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
 
                 {/* Brands */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Available Brands</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Available Brands</h3>
                   <div className="grid grid-cols-2 gap-3">
                     {product.brands.map((brand, index) => (
                       <div
@@ -119,28 +149,13 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
             </div>
 
             {/* Action Buttons */}
-            <div className="flex justify-end space-x-4 mt-8 pt-6 border-t border-gray-200">
+            <div className="flex justify-center mt-8 pt-6 border-t border-gray-200">
               <button
                 onClick={onClose}
-                className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                className="px-8 py-3 bg-gray-600 text-white rounded-lg font-semibold hover:bg-gray-700 transition-colors"
               >
                 Close
               </button>
-              <motion.button
-                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-semibold shadow-lg hover:from-blue-700 hover:to-blue-800 transition-all"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  const element = document.querySelector("#contact")
-                  if (element) {
-                    onClose()
-                    element.scrollIntoView({ behavior: "smooth" })
-                  }
-                }}
-              >
-                <i className="fas fa-envelope mr-2"></i>
-                Request Quote
-              </motion.button>
             </div>
           </div>
         </motion.div>

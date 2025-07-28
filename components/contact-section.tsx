@@ -1,76 +1,45 @@
 "use client"
 
-import type React from "react"
-
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
+import { submitContactForm } from "@/app/actions/contact"
 
 export default function ContactSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-  })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null
+    message: string
+  }>({ type: null, message: "" })
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true)
+    setSubmitStatus({ type: null, message: "" })
 
-    // Simulate form submission
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", phone: "", company: "", message: "" })
+      const result = await submitContactForm(formData)
+
+      if (result.success) {
+        setSubmitStatus({ type: "success", message: result.message })
+        // Reset form
+        const form = document.getElementById("contact-form") as HTMLFormElement
+        if (form) form.reset()
+      } else {
+        setSubmitStatus({ type: "error", message: result.message })
+      }
     } catch (error) {
-      setSubmitStatus("error")
+      setSubmitStatus({
+        type: "error",
+        message: "An unexpected error occurred. Please try again.",
+      })
     } finally {
       setIsSubmitting(false)
-      setTimeout(() => setSubmitStatus("idle"), 3000)
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const contactInfo = [
-    {
-      icon: "fas fa-map-marker-alt",
-      title: "Company Address",
-      content: "Software Park Phase II, Siming District, Xiamen, Fujian, China",
-      gradient: "from-blue-500 to-blue-600",
-    },
-    {
-      icon: "fas fa-phone",
-      title: "Phone Number",
-      content: "+86 592-1234567",
-      gradient: "from-green-500 to-green-600",
-    },
-    {
-      icon: "fas fa-envelope",
-      title: "Email Address",
-      content: "info@xiamenunion.com",
-      gradient: "from-purple-500 to-purple-600",
-    },
-    {
-      icon: "fas fa-clock",
-      title: "Business Hours",
-      content: "Monday to Friday 8:00-18:00",
-      gradient: "from-orange-500 to-orange-600",
-    },
-  ]
-
   return (
-    <section id="contact" className="py-20 bg-white" ref={ref}>
+    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
@@ -80,167 +49,243 @@ export default function ContactSection() {
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Contact Us</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We are always ready to provide professional consulting services and look forward to establishing long-term
-            cooperative relationships with you
+            Get in touch with our expert team for professional industrial spare parts solutions
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+          {/* Contact Information */}
           <motion.div
+            className="space-y-8"
             initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Message</h3>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Name *</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                    placeholder="Please describe your requirements in detail..."
-                    required
-                  ></textarea>
-                </div>
-
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full px-8 py-4 font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all ${
-                    isSubmitting
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : submitStatus === "success"
-                        ? "bg-green-600 hover:bg-green-700"
-                        : submitStatus === "error"
-                          ? "bg-red-600 hover:bg-red-700"
-                          : "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                  } text-white`}
-                  whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
-                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <i className="fas fa-spinner fa-spin mr-2"></i>
-                      Sending...
-                    </>
-                  ) : submitStatus === "success" ? (
-                    <>
-                      <i className="fas fa-check mr-2"></i>
-                      Message Sent!
-                    </>
-                  ) : submitStatus === "error" ? (
-                    <>
-                      <i className="fas fa-exclamation-triangle mr-2"></i>
-                      Try Again
-                    </>
-                  ) : (
-                    <>
-                      <i className="fas fa-paper-plane mr-2"></i>
-                      Send Message
-                    </>
-                  )}
-                </motion.button>
-              </form>
-            </div>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.title}
-                  className="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div
-                    className={`w-12 h-12 bg-gradient-to-br ${info.gradient} rounded-lg flex items-center justify-center flex-shrink-0`}
-                  >
-                    <i className={`${info.icon} text-white text-lg`}></i>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">{info.title}</h4>
-                    <p className="text-gray-600">{info.content}</p>
-                  </div>
-                </motion.div>
-              ))}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
+              <p className="text-gray-600 mb-8">
+                We're here to help you find the right industrial spare parts for your needs. Contact us today for expert
+                advice and competitive pricing.
+              </p>
+            </div>
 
-              {/* Map Placeholder */}
+            <div className="space-y-6">
               <motion.div
-                className="mt-8 rounded-2xl overflow-hidden shadow-lg"
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                className="flex items-start space-x-4"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="relative h-64 bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
-                  <div className="text-center">
-                    <i className="fas fa-map text-4xl text-blue-600 mb-4"></i>
-                    <p className="text-gray-600">Map Location</p>
-                  </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-map-marker-alt text-white"></i>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Address</h4>
+                  <p className="text-gray-600">
+                    Xiamen Union Spares Ltd.
+                    <br />
+                    Industrial District, Xiamen
+                    <br />
+                    Fujian Province, China
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="flex items-start space-x-4"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="flex-shrink-0 w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-phone text-white"></i>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Phone</h4>
+                  <p className="text-gray-600">
+                    +86 592 1234 5678
+                    <br />
+                    +86 592 8765 4321
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="flex items-start space-x-4"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-envelope text-white"></i>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Email</h4>
+                  <p className="text-gray-600">
+                    info@xiamenunion.com
+                    <br />
+                    sales@xiamenunion.com
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="flex items-start space-x-4"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="flex-shrink-0 w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center">
+                  <i className="fas fa-clock text-white"></i>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Business Hours</h4>
+                  <p className="text-gray-600">
+                    Monday - Friday: 8:00 AM - 6:00 PM
+                    <br />
+                    Saturday: 9:00 AM - 5:00 PM
+                    <br />
+                    Sunday: Closed
+                  </p>
                 </div>
               </motion.div>
             </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            className="bg-white rounded-2xl shadow-xl p-8"
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
+
+            {/* Status Messages */}
+            {submitStatus.type && (
+              <motion.div
+                className={`mb-6 p-4 rounded-lg ${
+                  submitStatus.type === "success"
+                    ? "bg-green-50 text-green-800 border border-green-200"
+                    : "bg-red-50 text-red-800 border border-red-200"
+                }`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="flex items-center">
+                  <i
+                    className={`fas ${submitStatus.type === "success" ? "fa-check-circle" : "fa-exclamation-circle"} mr-2`}
+                  ></i>
+                  {submitStatus.message}
+                </div>
+              </motion.div>
+            )}
+
+            <form id="contact-form" action={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    placeholder="your.email@company.com"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    placeholder="Your company name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                  Subject *
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  placeholder="What can we help you with?"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={6}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
+                  placeholder="Please describe your requirements in detail..."
+                ></textarea>
+              </div>
+
+              <motion.button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full py-4 px-6 rounded-lg font-semibold text-white transition-all ${
+                  isSubmitting
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl"
+                }`}
+                whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    Sending Message...
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center">
+                    <i className="fas fa-paper-plane mr-2"></i>
+                    Send Message
+                  </div>
+                )}
+              </motion.button>
+            </form>
           </motion.div>
         </div>
       </div>
