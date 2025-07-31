@@ -12,19 +12,19 @@ export default function Footer() {
   ]
 
   const productCategories = [
-    "Hydraulic System Parts",
-    "Electrical Control Parts",
-    "Mechanical Drive Parts",
-    "Sealing & Lubrication",
-    "Instrumentation",
-    "Safety & Protection",
+    "cylinder-cover",
+    "piston",
+    "cylinder-liner",
+    "bearing",
+    "crankshaft",
+    "connecting-rod",
   ]
 
   const socialLinks = [
-    { icon: "fab fa-weixin", name: "WeChat" },
-    { icon: "fab fa-qq", name: "QQ" },
-    { icon: "fas fa-envelope", name: "Email" },
-    { icon: "fas fa-phone", name: "Phone" },
+    { icon: "fab fa-weixin", name: "WeChat", href: "#contact" },
+    { icon: "fab fa-qq", name: "QQ", href: "#contact" },
+    { icon: "fas fa-envelope", name: "Email", href: "#contact" },
+    { icon: "fas fa-phone", name: "Phone", href: "#contact" },
   ]
 
   const scrollToSection = (href: string) => {
@@ -60,15 +60,16 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
-                <motion.a
+                <motion.button
                   key={social.name}
-                  href="#"
+                  onClick={() => scrollToSection(social.href)}
+                  aria-label={social.name} // Good for accessibility
                   className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.9 }}
                 >
                   <i className={`${social.icon} text-lg`}></i>
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </motion.div>

@@ -9,50 +9,57 @@ export default function ProductOverview() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const router = useRouter()
 
-  const productCategories = [
-    {
-      title: "Hydraulic Systems",
-      description: "High-precision hydraulic pumps, valves, seals and core components",
-      icon: "fas fa-tint",
-      gradient: "from-blue-500 to-blue-600",
-      count: "500+ Products",
-    },
-    {
-      title: "Electrical Control",
-      description: "PLC modules, sensors, relays and automation equipment",
-      icon: "fas fa-bolt",
-      gradient: "from-purple-500 to-purple-600",
-      count: "300+ Products",
-    },
-    {
-      title: "Mechanical Drive",
-      description: "Bearings, gears, couplings and transmission components",
-      icon: "fas fa-cog",
-      gradient: "from-green-500 to-green-600",
-      count: "400+ Products",
-    },
-    {
-      title: "Sealing & Lubrication",
-      description: "O-rings, oil seals, lubricants and sealing products",
-      icon: "fas fa-shield-alt",
-      gradient: "from-orange-500 to-orange-600",
-      count: "200+ Products",
-    },
-    {
-      title: "Instrumentation",
-      description: "Pressure gauges, thermometers, flow meters and measuring equipment",
-      icon: "fas fa-gauge-high",
-      gradient: "from-red-500 to-red-600",
-      count: "150+ Products",
-    },
-    {
-      title: "Safety & Protection",
-      description: "Safety valves, explosion-proof equipment, protective gear",
-      icon: "fas fa-hard-hat",
-      gradient: "from-cyan-500 to-cyan-600",
-      count: "100+ Products",
-    },
-  ]
+const productCategories = [
+    {
+      title: "All Products",
+      description: "Browse our complete catalog of high-quality products",
+      icon: "fas fa-th-large",
+      gradient: "from-blue-500 to-blue-600",
+      count: "1000+ Products",
+    },
+    {
+      title: "Cylinder Cover",
+      description: "Durable and reliable cylinder covers for various applications",
+      icon: "fas fa-clone",
+      gradient: "from-purple-500 to-purple-600",
+      count: "150+ Products",
+    },
+    {
+      title: "Piston",
+      description: "High-performance pistons designed for maximum efficiency",
+      icon: "fas fa-compact-disc",
+      gradient: "from-green-500 to-green-600",
+      count: "200+ Products",
+    },
+    {
+      title: "Cylinder Liner",
+      description: "Precision-engineered cylinder liners for optimal function",
+      icon: "fas fa-life-ring",
+      gradient: "from-orange-500 to-orange-600",
+      count: "180+ Products",
+    },
+    {
+      title: "Bearing & Bearing Bush",
+      description: "A wide selection of bearings and bushes for smooth operation",
+      icon: "fas fa-ring",
+      gradient: "from-red-500 to-red-600",
+      count: "300+ Products",
+    },
+    {
+      title: "Crankshaft",
+      description: "Robust crankshafts built to withstand extreme conditions",
+      icon: "fas fa-cogs",
+      gradient: "from-cyan-500 to-cyan-600",
+      count: "90+ Products",
+    },
+    {
+      title: "Connecting Rod",
+      description: "Strong and lightweight connecting rods for superior performance",
+      icon: "fas fa-link",
+      gradient: "from-teal-500 to-teal-600",
+      count: "120+ Products",
+    },
+  ]
 
   return (
     <section id="products" className="py-20 bg-gray-50" ref={ref}>

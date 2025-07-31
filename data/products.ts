@@ -282,5 +282,515 @@ export const products: Product[] = [
       "Material": "Steel / Ductile Iron",
       "Component": "Crankshaft"
     }
-  }
+  },
+  {
+    "id": 14,
+    "title": "Sulzer S20 Cylinder Cover",
+    "category": "cylinder-cover",
+    "description": "Replacement cylinder heads for Sulzer S20 marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylindercover/img-sulzer-s20-cylinder-cover-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: S20", "Application: Marine diesel engines", "Brand Compatibility: Sulzer"],
+    "applications": ["Marine engine maintenance", "Ship engine repair"],
+    "brands": ["Spares Union (compatible with Sulzer)"],
+    "detailedDescription": "The Sulzer S20 Cylinder Head is used for the replacement and maintenance of Sulzer brand marine diesel engines. As a direct manufacturer, we offer these high-value components at a competitive price advantage, ensuring quality and reliability for your engine.",
+    "technicalSpecs": {
+      "Engine Brand": "Sulzer",
+      "Engine Model": "S20",
+      "Component": "Cylinder Cover"
+    }
+  },
+  {
+    "id": 15,
+    "title": "Sulzer AL25-30 Cylinder Cover",
+    "category": "cylinder-cover",
+    "description": "Quality cylinder heads for Sulzer AL25-30 series diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylindercover/img-sulzer-al25-30-cylinder-cover-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: AL25-30", "Application: Diesel engines", "Brand Compatibility: Sulzer"],
+    "applications": ["Industrial diesel engines", "Engine maintenance"],
+    "brands": ["Spares Union (compatible with Sulzer)"],
+    "detailedDescription": "We provide accessories for major diesel engine brands like Sulzer, including the Sulzer AL25-30 Cylinder Head. The head provides space for fuel and air passages and is critical for engine performance. Our products come with a first-hand price and quality assurance, allowing you to maintain your engine with confidence.",
+    "technicalSpecs": {
+      "Engine Brand": "Sulzer",
+      "Engine Model": "AL25-30",
+      "Component": "Cylinder Cover"
+    }
+  },
+  {
+    "id": 16,
+    "title": "Sulzer 40-48 Cylinder Head",
+    "category": "cylinder-cover",
+    "description": "Cylinder heads/covers for Sulzer 40-48 series marine and train engines.",
+    "icon": "",
+    "image": "/image/products/cylindercover/img-sulzer-40-48-cylinder-cover-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: 40-48", "Application: Marine & train engines", "Engine Type: Sulzer LDA series"],
+    "applications": ["British Rail locomotives", "Romanian Railways locomotives", "Marine engines"],
+    "brands": ["Spares Union (compatible with Sulzer)"],
+    "detailedDescription": "As a long-established manufacturer of marine and train engine parts, we provide components for major brands like Sulzer, including the Sulzer 40-48 Cylinder Head (or Cylinder Cover). This component was used in the double-bank Sulzer LDA engines. We offer our products with a significant price advantage to help you maintain your engine affordably.",
+    "technicalSpecs": {
+      "Engine Brand": "Sulzer",
+      "Engine Model": "40-48",
+      "Component": "Cylinder Head"
+    }
+  },
+  {
+    "id": 17,
+    "title": "Sulzer 20-24 Cylinder Cover",
+    "category": "cylinder-cover",
+    "description": "Cylinder covers for Sulzer 20-24 series rail traction engines.",
+    "icon": "",
+    "image": "/image/products/cylindercover/img-sulzer-20-24-cylinder-cover-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: 20-24", "Application: Rail traction engines", "Resistant to overheating cracks"],
+    "applications": ["Diesel locomotives", "Rail engine maintenance"],
+    "brands": ["Spares Union (compatible with Sulzer)"],
+    "detailedDescription": "Sulzer's 20-24 series engines were used extensively in diesel locomotives across the UK, Europe, and South America. As an established manufacturer, we provide replacement cylinder covers for these engines. Repairing a cracked head is often much less expensive than replacement, and we offer quality parts with a price advantage to facilitate your maintenance needs.",
+    "technicalSpecs": {
+      "Engine Brand": "Sulzer",
+      "Engine Model": "20-24",
+      "Component": "Cylinder Cover"
+    }
+  },
+  {
+    "id": 18,
+    "title": "Wärtsilä W22 Cylinder Cover",
+    "category": "cylinder-cover",
+    "description": "Cylinder covers for Wärtsilä W22 marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylindercover/img-w22-cylinder-cover-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: W22", "Application: Marine diesel engines", "Brand Compatibility: Wärtsilä"],
+    "applications": ["Wärtsilä marine engines", "Energy and marine markets"],
+    "brands": ["Spares Union (compatible with Wärtsilä)"],
+    "detailedDescription": "Our factory provides various parts for Wärtsilä engines, including the W22 cylinder cover. These covers are essential for sealing the cylinder head space from the outside, containing blow-by gases and lubricant oil droplets. We offer these and other components like piston rings and cylinder liners for your maintenance needs.",
+    "technicalSpecs": {
+      "Engine Brand": "Wärtsilä",
+      "Engine Model": "W22",
+      "Component": "Cylinder Cover"
+    }
+  },
+  {
+  "id": 19,
+  "title": "SKL NVD48 Piston Pin",
+  "category": "piston",
+  "description": "Piston pins for SKL NVD48 diesel engines.",
+  "icon": "",
+  "image": "/image/products/piston/img-nvd48-pinston-pin-0.jpg",
+  "gradient": "from-transparent to-transparent",
+  "specifications": ["Model: NVD48", "Application: Diesel engines", "Brand Compatibility: SKL"],
+  "applications": ["SKL diesel engines", "Marine and industrial applications"],
+  "brands": ["Spares Union (compatible with SKL)"],
+  "detailedDescription": "The cylinder walls and piston-pin bearings are lubricated by oil fling dispersed by the rotating crankshaft, with excess oil scraped off by the lower piston ring. Our factory is a large-scale diesel engine parts R&D and manufacturer in China. We provide NVD48 Piston Pins to ensure your maintenance needs for SKL brand diesel engines. Welcome to contact us.",
+  "technicalSpecs": {
+    "Engine Brand": "SKL",
+    "Engine Model": "NVD48",
+    "Component": "Piston"
+    }
+  },
+  {
+  "id": 20,
+  "title": "EMD 40078951 Piston Pin",
+  "category": "piston",
+  "description": "High-quality piston pin with part number 40078951 for EMD diesel engines.",
+  "icon": "",
+  "image": "/image/products/piston/img-emd-40078951-piston-0.jpg",
+  "gradient": "from-transparent to-transparent",
+  "specifications": ["Part Number: 40078951", "Application: Diesel engines", "Brand Compatibility: EMD"],
+  "applications": ["EMD diesel engines", "Locomotives and industrial applications"],
+  "brands": ["Spares Union (compatible with EMD)"],
+  "detailedDescription": "The piston pin serves as the crucial connecting link between the piston and the connecting rod. It is designed as a simple, strong cylindrical shaft, which can be solid or hollow. We are a professional manufacturer in China providing affordable, first-hand diesel engine parts like the EMD 40078951 Piston Pin for your maintenance needs. Welcome to contact us.",
+  "technicalSpecs": {
+    "Engine Brand": "EMD",
+    "Component": "Piston",
+    "Part Number": "40078951"
+    }
+  },
+  {
+    "id": 21,
+    "title": "EMD 8269842 Piston Pin",
+    "category": "piston",
+    "description": "Durable piston pin with part number 8269842 for EMD diesel engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-emd-8269842-piston-pin-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Part Number: 8269842", "Application: Diesel engines", "Brand Compatibility: EMD"],
+    "applications": ["EMD diesel engines", "Marine and railway applications"],
+    "brands": ["Spares Union (compatible with EMD)"],
+    "detailedDescription": "The cylinder walls and piston-pin bearings are lubricated by oil dispersed by the rotating crankshaft, with excess oil scraped off by the piston's lower ring. We are a professional manufacturer of diesel engine parts in China, providing first-hand affordable products like the EMD 8269842 Piston Pin. We also offer pistons, cylinder heads, and other parts. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "EMD",
+      "Component": "Piston",
+      "Part Number": "8269842"
+    }
+  },
+  {
+    "id": 22,
+    "title": "MAN T23 Piston",
+    "category": "piston",
+    "description": "Replacement pistons for MAN T23 model diesel engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-t23-piston-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: T23", "Application: Diesel engines", "Brand Compatibility: MAN"],
+    "applications": ["MAN diesel engines", "Power generation and marine propulsion"],
+    "brands": ["Spares Union (compatible with MAN)"],
+    "detailedDescription": "Pistons are commonly made of cast aluminum alloy for its excellent lightweight thermal conductivity. Proper clearance must be provided to maintain free piston movement in the cylinder bore as it expands with heat. As a production factory, we provide T23 pistons for routine maintenance of MAN brand diesel engines and parts for other brands. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "MAN",
+      "Engine Model": "T23",
+      "Component": "Piston"
+    }
+  },
+  {
+    "id": 23,
+    "title": "Pielstick PC2-6H Piston",
+    "category": "piston",
+    "description": "Durable pistons for Pielstick PC2-6H model diesel engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-ps2-6h-piston-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: PC2-6H", "Application: Diesel engines", "Brand Compatibility: S.E.M.T. Pielstick"],
+    "applications": ["Pielstick diesel engines", "Submarines and naval vessels", "Marine propulsion"],
+    "brands": ["Spares Union (compatible with Pielstick)"],
+    "detailedDescription": "The piston's reciprocating motion is converted into the circular motion of the crankshaft, which ultimately propels the vessel or does other useful work. We provide PC2-6H piston maintenance for Pielstick brand engines and also offer various accessories like cylinder heads and liners for Man, EMD, Wartsila, and other brands. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Pielstick",
+      "Engine Model": "PC2-6H",
+      "Component": "Piston"
+    }
+  },
+  {
+    "id": 24,
+    "title": "Pielstick PC2-6D Piston",
+    "category": "piston",
+    "description": "High-performance pistons for Pielstick PC2-6D model diesel engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-ps2-6d-piston-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: PC2-6D", "Application: Diesel engines", "Brand Compatibility: S.E.M.T. Pielstick"],
+    "applications": ["Pielstick diesel engines", "Naval frigates (e.g., Sawari II, Sigma class)", "US Navy vessels"],
+    "brands": ["Spares Union (compatible with Pielstick)"],
+    "detailedDescription": "Diesel engines are a highly efficient type of piston engine, available in two-stroke and four-stroke cycles. We are a professional manufacturer providing PC2-6D Pistons for Pielstick engine maintenance. We also supply various accessories for Man, EMD, Sulzer, Daihatsu, and other brands. Please contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Pielstick",
+      "Engine Model": "PC2-6D",
+      "Component": "Piston"
+    }
+  },
+  {
+    "id": 25,
+    "title": "Pielstick PC2-5 Piston",
+    "category": "piston",
+    "description": "Reliable pistons for Pielstick PC2-5 model diesel engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-pc2-5-piston-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: PC2-5", "Application: Diesel engines", "Brand Compatibility: S.E.M.T. Pielstick"],
+    "applications": ["Pielstick diesel engines", "Naval vessels (frigates, patrol boats, landing docks)"],
+    "brands": ["Spares Union (compatible with Pielstick)"],
+    "detailedDescription": "In an engine, the piston's purpose is to transfer force from expanding gas in the cylinder to the crankshaft via a connecting rod. We are a professional diesel engine parts manufacturer providing the PC2-5 piston to ensure the normal maintenance of Pielstick engines. We also provide cylinders, cylinder heads, and other accessories. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Pielstick",
+      "Engine Model": "PC2-5",
+      "Component": "Piston"
+    }
+  },
+  {
+    "id": 26,
+    "title": "MAN 35MC Piston Head",
+    "category": "piston",
+    "description": "Piston heads for MAN 35MC marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-man-35mc-piston-crown-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: 35MC", "Component: Piston Head", "Brand Compatibility: MAN"],
+    "applications": ["MAN marine diesel engines", "Marine propulsion systems", "Power plant applications"],
+    "brands": ["Spares Union (compatible with MAN)"],
+    "detailedDescription": "The piston head is the top surface of the piston, subjected to tremendous forces and heat during engine operation. With the widespread use of MAN marine diesel engines, we have provided a large number of accessories for ship maintenance, including the MAN 35MC Piston Head. We also supply parts for other brands like EMD, Sulzer, and Wartsila. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "MAN",
+      "Engine Model": "35MC",
+      "Component": "Piston"
+    }
+  },
+  {
+    "id": 27,
+    "title": "MAN S50MC Piston Crown",
+    "category": "piston",
+    "description": "High-durability piston crowns for MAN S50MC two-stroke marine engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-man-s50mc-piston-crown-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: S50MC", "Component: Piston Crown", "Brand Compatibility: MAN"],
+    "applications": ["MAN two-stroke marine engines", "Large container vessels", "Bulk carriers"],
+    "brands": ["Spares Union (compatible with MAN)"],
+    "detailedDescription": "The piston crown is the uppermost part of the piston that endures the highest thermal and mechanical loads in the combustion chamber. Our MAN S50MC compatible piston crowns are manufactured to withstand extreme conditions, ensuring engine reliability and efficiency. We supply a wide range of MAN engine components for the global after-sales market. Contact us for your engine maintenance needs.",
+    "technicalSpecs": {
+      "Engine Brand": "MAN",
+      "Engine Model": "S50MC",
+      "Component": "Piston"
+    }
+  },
+  {
+    "id": 28,
+    "title": "Pielstick PC2-2 Piston",
+    "category": "piston",
+    "description": "Replacement pistons for Pielstick PC2-2 diesel engines.",
+    "icon": "",
+    "image": "/image/products/piston/img-pc2-2-piston-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: PC2-2", "Application: Marine and locomotive diesel engines", "Brand Compatibility: S.E.M.T. Pielstick"],
+    "applications": ["Pielstick diesel engines", "Marine propulsion", "Locomotive engines"],
+    "brands": ["Spares Union (compatible with Pielstick)"],
+    "detailedDescription": "Pistons work by transferring the force from expanding gas in the cylinder to a crankshaft, creating rotational momentum in a reciprocating engine. As a long-established marine and locomotive diesel engine parts manufacturer, we provide various parts for Pielstick and other brands, such as the PC2-2 piston. We offer large-scale parts R&D and production services. Please contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Pielstick",
+      "Engine Model": "PC2-2",
+      "Component": "Piston"
+    }
+  },
+  {
+    "id": 29,
+    "title": "EMD Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "Cylinder liners for EMD diesel engines used in rail and marine applications.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-emd-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Application: Diesel engines", "Brand Compatibility: EMD", "Component: Cylinder Liner"],
+    "applications": ["EMD diesel engines", "Diesel-electric locomotives", "Marine energy supply"],
+    "brands": ["Spares Union (compatible with EMD)"],
+    "detailedDescription": "The cylinder liner serves as the inner wall of a cylinder, forming an excellent sliding surface for the piston rings while retaining lubricant. Our factory provides various accessories for EMD diesel engines, including pistons, cylinder liners, and rings. We have mass-produced EMD-related accessories for many years, which play a huge role in the energy supply of ships and trains. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "EMD",
+      "Component": "Cylinder Liner"
+    }
+  },
+  {
+    "id": 30,
+    "title": "MaK M453AK Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "Cylinder liners for MaK M453AK marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-mak453ak-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: M453AK", "Brand Compatibility: MaK", "Material: Cast iron alloy"],
+    "applications": ["MaK marine diesel engines", "Ships and locomotives"],
+    "brands": ["Spares Union (compatible with MaK)"],
+    "detailedDescription": "The cylinder liner forms the cylindrical space in which the piston reciprocates. While the cylinder block is often made from grey cast iron, our liners are manufactured from a superior cast iron alloyed with chromium, vanadium, and molybdenum for enhanced durability. As a professional manufacturer, we provide various parts for MaK diesel engines, such as this M453AK cylinder liner. Contact us for more information.",
+    "technicalSpecs": {
+      "Engine Brand": "MaK",
+      "Engine Model": "M453AK",
+      "Component": "Cylinder Liner"
+    }
+  },
+  {
+    "id": 31,
+    "title": "Daihatsu DL-26 Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "High-quality cylinder liners for Daihatsu DL-26 marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-dl-26-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: DL-26", "Brand Compatibility: Daihatsu", "Material: High-grade metal alloy"],
+    "applications": ["Daihatsu marine engines", "Ship maintenance"],
+    "brands": ["Spares Union (compatible with Daihatsu)"],
+    "detailedDescription": "We provide the DL-26 cylinder liner and other Daihatsu marine parts. The liner, made from a good quality metal with excellent heat transfer properties, forms the cylindrical space for the piston. Our DL-26 cylinder liners meet the rigorous requirements of diesel engines, and the superior materials ensure a long service life. We look forward to hearing from you.",
+    "technicalSpecs": {
+      "Engine Brand": "Daihatsu",
+      "Engine Model": "DL-26",
+      "Component": "Cylinder Liner"
+    }
+  },
+  {
+    "id": 32,
+    "title": "Pielstick PC2-5 Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "Cylinder liners for Pielstick PC2-5 multi-fuel diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-pc2-5-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: PC2-5", "Brand Compatibility: Pielstick", "Material: Cast iron alloy with chromium, vanadium, molybdenum"],
+    "applications": ["Pielstick diesel engines", "Marine power plants", "Multi-fuel applications (HFO, bio-fuel)"],
+    "brands": ["Spares Union (compatible with Pielstick)"],
+    "detailedDescription": "The PC2-5 cylinder liner we provide is a main accessory for maintaining Pielstick marine diesel engines. These liners are manufactured from a cast iron alloyed with chromium, vanadium, and molybdenum, creating the durable cylindrical space in which the piston reciprocates. We also provide diesel engine accessories for other brands. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Pielstick",
+      "Engine Model": "PC2-5",
+      "Component": "Cylinder Liner"
+    }
+  },
+  {
+    "id": 33,
+    "title": "Daihatsu 6PS-26H Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "Cylinder liners (sleeves) for Daihatsu 6PS-26H series engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-6ps-26h-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: 6PS-26H", "Brand Compatibility: Daihatsu", "Function: Forms cylinder for piston travel"],
+    "applications": ["Marine engines", "Locomotive engines", "Power generation"],
+    "brands": ["Spares Union (compatible with Daihatsu)"],
+    "detailedDescription": "A cylinder liner is a crucial cylindrical part fitted into an engine block to form a cylinder. In a reciprocating engine, it provides the space where the piston travels, riding on a thin layer of lubricating oil. As professional manufacturers for marine and locomotive power, we produce and export a series of cylinder liners, including the 6PS-26H model. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Daihatsu",
+      "Engine Model": "6PS-26H",
+      "Component": "Cylinder Liner"
+    }
+  },
+  {
+    "id": 34,
+    "title": "6MA1200 Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "Heavy-duty cylinder liners for 6MA1200 series diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-6ma1200-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: 6MA1200", "Application: Train and ship diesel engines", "Feature: High-quality, long service life"],
+    "applications": ["Heavy-duty diesel engines", "Marine propulsion", "Railway locomotives"],
+    "brands": ["Spares Union (compatible with 6MA1200 engines)"],
+    "detailedDescription": "Cylinder liners are vital components that protect the piston from wear and tear. As a professional diesel engine parts factory with years of experience, we ensure the quality of our cylinders meets international advanced levels. The 6MA1200 cylinder liner is one of our many products, mass-produced and delivered with a guarantee for a long service life. We look forward to your contact.",
+    "technicalSpecs": {
+      "Engine Brand": "Generic",
+      "Engine Model": "6MA1200",
+      "Component": "Cylinder Liner"
+    }
+  },
+  {
+    "id": 35,
+    "title": "Daihatsu 6DS-32 Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "Cost-effective cylinder liners for Daihatsu 6DS-32 diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-6ds-32-cylinder-linder-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: 6DS-32", "Brand Compatibility: Daihatsu", "Manufacturing: Centrifugal casting"],
+    "applications": ["Daihatsu diesel engines", "Fuel-efficient engines", "Aluminum engine blocks"],
+    "brands": ["Spares Union (compatible with Daihatsu)"],
+    "detailedDescription": "The 6DS-32 Cylinder Liner is used in Daihatsu Diesel Engines. As a source manufacturer, we utilize centrifugal casting to make liners thinner, improving cooling performance and adherence to aluminum blocks to meet modern demands for fuel efficiency and lighter engines. Our cost-effective diesel engine parts are ready for order. Welcome to inquire.",
+    "technicalSpecs": {
+      "Engine Brand": "Daihatsu",
+      "Engine Model": "6DS-32",
+      "Component": "Cylinder Liner"
+    }
+  },
+  {
+    "id": 36,
+    "title": "Sulzer LDA28 Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "Cylinder liners for Sulzer LDA28 series stationary, rail, and marine engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-sulzer-lda28-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: LDA28", "Bore Size: 28cm", "Brand Compatibility: Sulzer"],
+    "applications": ["Sulzer diesel engines", "Stationary power", "Rail traction", "Marine propulsion"],
+    "brands": ["Spares Union (compatible with Sulzer)"],
+    "detailedDescription": "The Sulzer 6LDA28 engine indicates a six-cylinder engine in the 'LDA' series with a 28cm cylinder bore. As a manufacturer with nearly 20 years of experience casting large diesel engine parts, we provide high-quality Sulzer LDA28 cylinder liners and components for other brands. We are glad you can contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Sulzer",
+      "Engine Model": "LDA28",
+      "Component": "Cylinder Liner"
+    },
+    "gallery": [
+      "/image/products/cylinderliner/img-sulzer-lda28-cylinder-liner-1.jpg",
+      "/image/products/cylinderliner/img-sulzer-lda28-cylinder-liner-2.jpg",
+      "/image/products/cylinderliner/img-sulzer-lda28-cylinder-liner-3.jpg"
+    ]
+  },
+  {
+    "id": 37,
+    "title": "SKL D49 Cylinder Liner",
+    "category": "cylinder-liner",
+    "description": "High-quality dry-type cylinder liners for SKL D49 diesel engines.",
+    "icon": "",
+    "image": "/image/products/cylinderliner/img-d49-cylinder-liner-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: D49", "Brand Compatibility: SKL", "Type: Dry liner"],
+    "applications": ["SKL diesel engines", "Marine engines", "Train engines"],
+    "brands": ["Spares Union (compatible with SKL)"],
+    "detailedDescription": "We provide high-quality D49 cylinder liners, a main component of the diesel engine. These dry-type liners are made from close-grained cast iron and provide a very close fit with the jacket in the cylinder block to protect the piston. Our factory has strong R&D and manufacturing capabilities for marine and train engine parts. Welcome to contact us for more cooperation.",
+    "technicalSpecs": {
+      "Engine Brand": "SKL",
+      "Engine Model": "D49",
+      "Component": "Cylinder Liner"
+    },
+    "gallery": [
+      "/image/products/cylinderliner/img-d49-cylinder-liner-1.jpg"
+    ]
+  },
+  {
+    "id": 38,
+    "title": "EMD Connecting Rod",
+    "category": "connecting-rod",
+    "description": "General purpose connecting rods for EMD diesel engines.",
+    "icon": "",
+    "image": "/image/products/connectingrod/img-emd-connecting-rod-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Brand Compatibility: EMD", "Application: Diesel Engines", "Type: Master-and-slave (for radial engines)"],
+    "applications": ["EMD diesel engines", "Radial engines", "Locomotives"],
+    "brands": ["Spares Union (compatible with EMD)"],
+    "detailedDescription": "Radial engines often use master-and-slave connecting rods, where a master rod attaches directly to the crankshaft and other rods pin to it. As China's leading diesel engine parts manufacturer, we provide a range of EMD Connecting Rods to meet your engine maintenance needs. We also supply cylinders, liners, and cylinder heads. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "EMD",
+      "Component": "Connecting Rod"
+    }
+  },
+  {
+    "id": 39,
+    "title": "EMD 8159354 Connecting Rod",
+    "category": "connecting-rod",
+    "description": "High-strength connecting rod, part number 8159354, for EMD engines.",
+    "icon": "",
+    "image": "/image/products/connectingrod/img-emd-8159354-connecting-rod-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Part Number: 8159354", "Brand Compatibility: EMD", "Application: Heavy-duty diesel engines"],
+    "applications": ["EMD diesel engines", "Locomotives", "Industrial power systems"],
+    "brands": ["Spares Union (compatible with EMD)"],
+    "detailedDescription": "During each rotation, a connecting rod is subjected to large repetitive shear, compression, and tensile forces. As a professional diesel engine parts factory, we mass-produce the EMD 8159354 Connecting Rod for engine maintenance. We also produce parts for MAN, SKL, Sulzer, and other brands. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "EMD",
+      "Part Number": "8159354",
+      "Component": "Connecting Rod"
+    }
+  },
+  {
+    "id": 40,
+    "title": "Daihatsu DS-22 Connecting Rod",
+    "category": "connecting-rod",
+    "description": "Connecting rods for Daihatsu DS-22 marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/connectingrod/img-ds-22-connecting-rod-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: DS-22", "Brand Compatibility: Daihatsu", "Application: Marine diesel engines"],
+    "applications": ["Daihatsu marine engines", "Ship propulsion systems"],
+    "brands": ["Spares Union (compatible with Daihatsu)"],
+    "detailedDescription": "A connecting rod for an internal combustion engine consists of the 'big end', 'rod', and 'small end'. The small end attaches to the gudgeon pin, while the big end connects to the crankpin. We provide the DS-22 Connecting Rod for DAIHATSU marine diesel engines to meet your parts requirements. We also supply accessories for other brands like MAN, EMD, and SKL. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Daihatsu",
+      "Engine Model": "DS-22",
+      "Component": "Connecting Rod"
+    }
+  },
+  {
+    "id": 41,
+    "title": "Daihatsu DL-20 Connecting Rod",
+    "category": "connecting-rod",
+    "description": "Connecting rods (con rods) for Daihatsu DL-20 marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/connectingrod/img-dl-20-connecting-rod-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: DL-20", "Brand Compatibility: Daihatsu", "Application: Marine diesel engines"],
+    "applications": ["Daihatsu marine engines", "Ship maintenance"],
+    "brands": ["Spares Union (compatible with Daihatsu)"],
+    "detailedDescription": "A connecting rod, or con rod, is the part of a piston engine which connects the piston to the crankshaft. Together with the crank, the connecting rod converts the reciprocating motion of the piston into the rotation of the crankshaft. We provide the DL-20 Connecting Rod for DAIHATSU marine diesel engine maintenance, along with other accessories like cylinder heads and pistons. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Daihatsu",
+      "Engine Model": "DL-20",
+      "Component": "Connecting Rod"
+    }
+  },
 ]

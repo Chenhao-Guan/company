@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import Image from "next/image" 
 import { useRouter, usePathname } from "next/navigation"
 
 export default function Header() {
@@ -67,8 +68,14 @@ export default function Header() {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             onClick={() => router.push("/")}
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-              <i className="fas fa-cogs text-white text-xl"></i>
+            <div className="w-12 h-12 flex items-center justify-center">
+              <Image
+                src="/logo.png" // The path to your image in the `public` folder
+                alt="Xiamen Union Spares Logo"
+                width={40} // Desired width in pixels
+                height={40} // Desired height in pixels
+                priority // Add this if the logo is above-the-fold to load it faster
+              />
             </div>
             <div>
               <h1 className={`text-xl font-bold ${isScrolled ? "text-gray-900" : "text-white"}`}>
