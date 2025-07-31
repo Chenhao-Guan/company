@@ -793,4 +793,186 @@ export const products: Product[] = [
       "Component": "Connecting Rod"
     }
   },
+  {
+    "id": 44,
+    "title": "SKL NVD 48 Copper Bushing",
+    "category": "bearing",
+    "description": "High-quality copper bushings for SKL NVD 48 marine diesel engines.",
+    "icon": "",
+    "image": "/image/products/bearings/img-NVD-48-main-bearings-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: NVD 48", "Brand Compatibility: SKL", "Material: Copper Alloy"],
+    "applications": ["SKL NVD 48 marine diesel engines", "Connecting rods", "Ship parts"],
+    "brands": ["Spares Union (compatible with SKL)"],
+    "detailedDescription": "We supply a wide range of spares for SKL engines, including NVD 36 copper bushings. These bushings are essential components for connecting rods in marine diesel engines, ensuring smooth operation and durability. All our parts undergo rigorous inspection to guarantee quality and reliability for your maintenance needs.",
+    "technicalSpecs": {
+      "Engine Brand": "SKL",
+      "Engine Model": "NVD 48",
+      "Component": "Copper Bushing"
+    },
+    "gallery": [
+      "/image/products/bearings/img-NVD-48-main-bearings-1.jpg"
+    ]
+  },
+  {
+    "id": 45,
+    "title": "SKL NVD 36 Bimetal Bushing",
+    "category": "bearing",
+    "description": "Standardized, ready-to-fit NVD 36 duplex metal bushings.",
+    "icon": "",
+    "image": "/image/products/bearings/img-NVD-36-bimetal-bushing-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: NVD 36", "Brand Compatibility: SKL", "Standard: DIN ISO 43791", "Type: Bimetal"],
+    "applications": ["Pivoting movements", "High-load applications", "Axial guide bearings"],
+    "brands": ["Spares Union (compatible with SKL)"],
+    "detailedDescription": "We are a leading company in manufacturing and exporting NVD 36 Duplex Metal Bushings. These standardized sliding bushings can absorb higher forces than conventional bearings and are ideal for high, unidirectional loads. The use of bimetal linings provides good mechanical strength, making them suitable for high-speed, high-load applications with proper lubrication.",
+    "technicalSpecs": {
+      "Engine Brand": "SKL",
+      "Engine Model": "NVD 36",
+      "Component": "Bimetal Bushing"
+    },
+    "gallery": [
+      "/image/products/bearings/img-NVD-36-bimetal-bushing-1.jpg",
+      "/image/products/bearings/img-NVD-36-bimetal-bushing-2.jpg"
+    ]
+  },
+  {
+    "id": 46,
+    "title": "SKL NVD26 Connecting Rod Bushing",
+    "category": "bearing",
+    "description": "Connecting rod bushings for SKL NVD26 heavy-duty diesel engines.",
+    "icon": "",
+    "image": "/image/products/bearings/img-NVD26-Connecting-rod-bushing-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: NVD26", "Brand Compatibility: SKL", "Application: Connecting Rod Small End"],
+    "applications": ["SKL diesel engines", "Heavy-duty engine applications"],
+    "brands": ["Spares Union (compatible with SKL)"],
+    "detailedDescription": "This bushing is part of a piston assembly for heavy-duty diesel engines. In lieu of a conventional Cu-Pb-Sn bushing, a coating of manganese phosphate is often applied to the pin or bore to provide necessary tribological properties. This porous coating absorbs and traps lubricating oil, creating a durable squeeze film between steel running surfaces under heavy loads.",
+    "technicalSpecs": {
+      "Engine Brand": "SKL",
+      "Engine Model": "NVD26",
+      "Component": "Connecting Rod Bushing"
+    },
+    "gallery": [
+      "/image/products/bearings/img-NVD26-Connecting-rod-bushing-1.jpg"
+    ]
+  },
+  {
+    "id": 47,
+    "title": "G72 Series Marine Bearings",
+    "category": "bearing",
+    "description": "G72 series standard and non-standard size bearings for marine engines.",
+    "icon": "",
+    "image": "/image/products/bearings/img-G72-1304-1CBG72-1303-1CB-bearings-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Series: G72", "Size: Metric and Imperial", "Application: Marine Engines"],
+    "applications": ["Leisure boats", "Marine propulsion systems", "Ship repair yards"],
+    "brands": ["Spares Union"],
+    "detailedDescription": "We supply G72 series bearings for marine engines. Manufactured on-site, we stock standard sizes in both metric and imperial for immediate delivery, which is essential when a boat is waiting in dry dock. We also specialize in manufacturing non-standard sizes and work with businesses of all sizes, from major international chandleries to small marina shops.",
+    "technicalSpecs": {
+      "Engine Brand": "Generic Marine",
+      "Series": "G72",
+      "Component": "Bearing"
+    },
+    "gallery": [
+      "/image/products/bearings/img-G72-1304-1CBG72-1303-1CB-bearings-1.jpg",
+      "/image/products/bearings/img-G72-1304-1CBG72-1303-1CB-bearings-2.jpg"
+    ]
+  },
+  {
+    "id": 48,
+    "title": "G60 Series Marine Bearings",
+    "category": "bearing",
+    "description": "G60 series connecting rod and main bearings for various diesel engines.",
+    "icon": "",
+    "image": "/image/products/bearings/img-G60-1307-CBG60-1306-CB-bearings-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Series: G60", "Application: Marine Diesel Engines", "Compatibility: SKL, Wartsila, MAN, MAK, Sulzer"],
+    "applications": ["SKL NVD26/36/48", "Wartsila L20/Vasa 22/32", "MAN, MAK, Sulzer engines"],
+    "brands": ["Spares Union (compatible with various brands)"],
+    "detailedDescription": "The bearing is an essential part of your marine engine, responsible for power distribution. We are manufacturers and exporters of G60 series marine diesel engine parts. We have developed equipment and technology for various diesel engine bearings, including connecting rod and main shells for engines from Russian Diesel, SKL, Wartsila, MAN, MAK, and Sulzer. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Brand": "Multi-Brand Compatible",
+      "Series": "G60",
+      "Component": "Bearing"
+    },
+    "gallery": [
+      "/image/products/bearings/img-G60-1307-CBG60-1306-CB-bearings-1.jpg",
+      "/image/products/bearings/img-G60-1307-CBG60-1306-CB-bearings-2.jpg"
+    ]
+  },
+  {
+    "id": 49,
+    "title": "6L27.5A2L Main Bearing STD",
+    "category": "bearing",
+    "description": "Standard main bearings for 6L27.5A2L marine and rail diesel engines.",
+    "icon": "",
+    "image": "/image/products/bearings/img-6L275A2L-main-bearing-STD-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: 6L27.5A2L", "Type: Main Bearing", "Size: Standard (STD)"],
+    "applications": ["Marine diesel engines", "Rail diesel engines", "Piston engines"],
+    "brands": ["Spares Union"],
+    "detailedDescription": "In a piston engine, main bearings hold the crankshaft in place and allow it to rotate within the engine block. The number of bearings can affect engine balance and reduce bending stress. As a Chinese marine and rail engine parts manufacturer, we provide many kinds of engine parts, such as this 6L main bearing STD. Welcome to contact us.",
+    "technicalSpecs": {
+      "Engine Model": "6L27.5A2L",
+      "Component": "Main Bearing"
+    },
+    "gallery": [
+      "/image/products/bearings/img-6L275A2L-main-bearing-STD-1.jpg",
+      "/image/products/bearings/img-6L275A2L-main-bearing-STD-2.jpg"
+    ]
+  },
+  {
+    "id": 50,
+    "title": "Akasaka AH30 & ALH28 Bearings",
+    "category": "bearing",
+    "description": "Main and crankpin bearings for Akasaka AH30 and ALH28 series engines.",
+    "icon": "",
+    "image": "/image/products/bearings/img-marine-bearing-catalog-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Brand: Akasaka", "Models: AH30, ALH28", "Types: Main Bearing, Crankpin Bearing"],
+    "applications": ["Akasaka marine engines", "Ship propulsion"],
+    "brands": ["Spares Union (compatible with Akasaka)"],
+    "detailedDescription": "We provide a range of bearings for Akasaka engines. This includes main bearings for the AH30 and ALH28 models, as well as crankpin bearings for the ALH28. These components are critical for holding the crankshaft in place and ensuring smooth rotational motion. Contact us for specific dimensions and availability.",
+    "technicalSpecs": {
+      "Engine Brand": "Akasaka",
+      "Component": "Main & Crankpin Bearing"
+    }
+  },
+  {
+    "id": 51,
+    "title": "EMD 8136114 Bearings",
+    "category": "bearing",
+    "description": "Main bearings with part number 8136114 for EMD 710-powered locomotives.",
+    "icon": "",
+    "image": "/image/products/bearings/img-emd-bearing-shell-8136114-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Part Number: 8136114", "Brand Compatibility: EMD", "Application: Locomotive diesel engines"],
+    "applications": ["EMD 710 series engines", "Locomotive modernization (ECO upgrades)"],
+    "brands": ["Spares Union (compatible with EMD)"],
+    "detailedDescription": "In a piston engine, main bearings hold the crankshaft and allow it to rotate. As a factory with many years of casting experience, we supply a large amount of EMD 8136114 Bearings for EMD brand locomotive diesel engines for maintenance needs. We also provide other accessories like pistons and cylinder heads. Welcome to call for advisory.",
+    "technicalSpecs": {
+      "Engine Brand": "EMD",
+      "Part Number": "8136114",
+      "Component": "Main Bearing"
+    }
+  },
+  {
+    "id": 52,
+    "title": "SKL D49 Main Bearings",
+    "category": "bearing",
+    "description": "Bi-metal main bearings for SKL D49 locomotive diesel engines.",
+    "icon": "",
+    "image": "/image/products/bearings/img-d49-main-bearing-shell-0.jpg",
+    "gradient": "from-transparent to-transparent",
+    "specifications": ["Model: D49", "Brand Compatibility: SKL", "Type: Bi-Metal Main Bearing"],
+    "applications": ["SKL D49 locomotive engines", "Diesel engine maintenance"],
+    "brands": ["Spares Union (compatible with SKL)"],
+    "detailedDescription": "Bearings are constructed from a steel backing and internal layers of metal. Bi-Metal bearings generally have an aluminum alloy bonded to the steel backing. As a factory with years of experience, we supply a large amount of D49 Main Bearings for D49 brand locomotive diesel engines for maintenance needs. We also provide other accessories like pistons and piston rings. Welcome to call for advisory.",
+    "technicalSpecs": {
+      "Engine Brand": "SKL",
+      "Engine Model": "D49",
+      "Component": "Main Bearing"
+    }
+  }
 ]
