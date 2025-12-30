@@ -1,10 +1,37 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
+import dynamic from "next/dynamic"
+import { Suspense } from "react"
 import HeroBanner from "@/components/hero-banner"
-import ProductOverview from "@/components/product-overview"
-import AboutSection from "@/components/about-section"
-import ContactSection from "@/components/contact-section"
+
+// Lazy load components below the fold
+const ProductOverview = dynamic(() => import("@/components/product-overview"), {
+  loading: () => (
+    <div className="py-20 flex justify-center">
+      <div className="animate-pulse text-gray-400">Loading...</div>
+    </div>
+  ),
+  ssr: true,
+})
+
+const AboutSection = dynamic(() => import("@/components/about-section"), {
+  loading: () => (
+    <div className="py-20 flex justify-center">
+      <div className="animate-pulse text-gray-400">Loading...</div>
+    </div>
+  ),
+  ssr: true,
+})
+
+const ContactSection = dynamic(() => import("@/components/contact-section"), {
+  loading: () => (
+    <div className="py-20 flex justify-center">
+      <div className="animate-pulse text-gray-400">Loading...</div>
+    </div>
+  ),
+  ssr: true,
+})
 
 export default function HomeContent() {
   const { scrollYProgress } = useScroll()
@@ -15,9 +42,15 @@ export default function HomeContent() {
       <motion.div style={{ opacity }}>
         <HeroBanner />
       </motion.div>
-      <ProductOverview />
-      <AboutSection />
-      <ContactSection />
+      <Suspense fallback={<div className="py-20 flex justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
+        <ProductOverview />
+      </Suspense>
+      <Suspense fallback={<div className="py-20 flex justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
+        <AboutSection />
+      </Suspense>
+      <Suspense fallback={<div className="py-20 flex justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
+        <ContactSection />
+      </Suspense>
     </main>
   )
 }

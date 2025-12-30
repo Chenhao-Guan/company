@@ -2,8 +2,9 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect, Suspense } from "react"
-import { ArrowRight, Search } from "lucide-react"
+import { ArrowRight, Search, ChevronLeft, ChevronRight } from "lucide-react"
 import dynamic from "next/dynamic"
+import Image from "next/image"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { ProductGridSkeleton } from "@/components/product-skeleton"
@@ -23,11 +24,18 @@ export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 12
 
   // Fix scroll position on page load
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  // Reset to page 1 when category or search changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [selectedCategory, searchTerm])
 
   // Fetch products from API
   useEffect(() => {
@@ -99,6 +107,19 @@ export default function ProductsPage() {
       product.brands.some((brand: string) => brand.toLowerCase().includes(searchTerm.toLowerCase()))
     return matchesCategory && matchesSearch
   })
+
+  // Pagination
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+  const indexOfLastProduct = currentPage * itemsPerPage
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+
+  // Scroll to top of products section when page changes
+  useEffect(() => {
+    if (currentPage > 1) {
+      window.scrollTo({ top: 400, behavior: 'smooth' })
+    }
+  }, [currentPage])
 
   return (
     <div className="min-h-screen bg-white">
@@ -185,14 +206,17 @@ export default function ProductsPage() {
                 ? "All Products"
                 : productCategories.find((c) => c.id === selectedCategory)?.name}
             </h2>
-            <p className="text-gray-600">Showing {filteredProducts.length} products</p>
+            <p className="text-gray-600">
+              Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
+            </p>
           </motion.div>
 
           {loading ? (
             <ProductGridSkeleton count={8} />
-          ) : filteredProducts.length > 0 ? (
+          ) : currentProducts.length > 0 ? (
+            <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((product, index) => (
+              {currentProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-blue-500"
@@ -212,10 +236,14 @@ export default function ProductsPage() {
                 }}
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <Image
                     src={product.image || "/placeholder.svg"}
                     alt={product.title}
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    priority={index < 8}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`}></div>
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -255,6 +283,79 @@ export default function ProductsPage() {
               </motion.div>
               ))}
             </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center mt-12 space-x-2">
+                <motion.button
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    currentPage === 1
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-white text-gray-700 hover:bg-blue-50 border border-gray-200"
+                  }`}
+                  whileHover={currentPage !== 1 ? { scale: 1.05 } : {}}
+                  whileTap={currentPage !== 1 ? { scale: 0.95 } : {}}
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </motion.button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                  // Show first, last, current, and adjacent pages
+                  if (
+                    page === 1 ||
+                    page === totalPages ||
+                    (page >= currentPage - 1 && page <= currentPage + 1)
+                  ) {
+                    return (
+                      <motion.button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                          currentPage === page
+                            ? "bg-blue-600 text-white shadow-lg"
+                            : "bg-white text-gray-700 hover:bg-blue-50 border border-gray-200"
+                        }`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        aria-label={`Go to page ${page}`}
+                        aria-current={currentPage === page ? "page" : undefined}
+                      >
+                        {page}
+                      </motion.button>
+                    )
+                  } else if (
+                    page === currentPage - 2 ||
+                    page === currentPage + 2
+                  ) {
+                    return (
+                      <span key={page} className="px-2 text-gray-400">
+                        ...
+                      </span>
+                    )
+                  }
+                  return null
+                })}
+
+                <motion.button
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    currentPage === totalPages
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-white text-gray-700 hover:bg-blue-50 border border-gray-200"
+                  }`}
+                  whileHover={currentPage !== totalPages ? { scale: 1.05 } : {}}
+                  whileTap={currentPage !== totalPages ? { scale: 0.95 } : {}}
+                  aria-label="Next page"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </motion.button>
+              </div>
+            )}
+            </>
           ) : (
             <div className="text-center py-12">
               <Search className="w-16 h-16 text-gray-400 mb-4 mx-auto" />

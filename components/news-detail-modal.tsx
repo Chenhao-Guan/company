@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import type { NewsItem } from "@/data/news"
 import { useState, useEffect, useRef } from "react"
 import { X, Calendar, Clock, User } from "lucide-react"
+import Image from "next/image"
 
 // Social media SVG icons
 const FacebookIcon = ({ className }: { className?: string }) => (
@@ -120,12 +121,14 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
                     : "mx-auto w-2/3"
             }`}
           >
-            <img
+            <Image
               src={image.url || "/placeholder.svg"}
               alt={image.caption}
-              loading="lazy"
+              width={1200}
+              height={900}
               className="w-full rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
               onClick={() => setSelectedImage(image.url)}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 66vw, 50vw"
             />
             <p className="text-sm text-gray-600 mt-2 italic text-center">{image.caption}</p>
           </div>,
@@ -169,11 +172,14 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
           {/* Header */}
           <div className="relative">
             <div className={`h-80 bg-gradient-to-br ${news.gradient} relative overflow-hidden`}>
-              <img
+              <Image
                 src={news.image || "/placeholder.svg"}
                 alt={news.title}
-                loading="lazy"
+                width={1600}
+                height={640}
                 className="w-full h-full object-cover opacity-50"
+                priority
+                sizes="100vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-16 text-white">
@@ -234,12 +240,14 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {news.gallery.map((image, index) => (
                     <div key={index} className="aspect-video rounded-lg overflow-hidden">
-                      <img
+                      <Image
                         src={image || "/placeholder.svg"}
                         alt={`${news.title} - Photo ${index + 1}`}
-                        loading="lazy"
+                        width={800}
+                        height={450}
                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                         onClick={() => setSelectedImage(image)}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 33vw, 25vw"
                       />
                     </div>
                   ))}

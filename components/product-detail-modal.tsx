@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import type { Product } from "@/data/products"
 import { X, Check, Factory } from "lucide-react"
 import { useEffect, useRef } from "react"
+import Image from "next/image"
 
 interface ProductDetailModalProps {
   product: Product | null
@@ -92,11 +93,14 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
               <div className="space-y-4">
                 {/* Main Image */}
                 <div className="aspect-square rounded-2xl overflow-hidden relative">
-                  <img
+                  <Image
                     src={product.image || "/placeholder.svg"}
                     alt={product.title}
-                    loading="lazy"
+                    width={800}
+                    height={800}
                     className="w-full h-full object-cover"
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`}></div>
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -109,11 +113,13 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                   <div className="grid grid-cols-3 gap-2">
                     {product.gallery.map((image, index) => (
                       <div key={index} className="aspect-square rounded-lg overflow-hidden">
-                        <img
+                        <Image
                           src={image || "/placeholder.svg"}
                           alt={`${product.title} - Additional view ${index + 1}`}
-                          loading="lazy"
+                          width={400}
+                          height={400}
                           className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
+                          sizes="(max-width: 1024px) 33vw, 200px"
                         />
                       </div>
                     ))}

@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect, Suspense } from "react"
 import { ArrowRight, Newspaper } from "lucide-react"
 import dynamic from "next/dynamic"
+import Image from "next/image"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { NewsGridSkeleton } from "@/components/news-skeleton"
@@ -134,10 +135,14 @@ export default function NewsPage() {
                 }}
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <Image
                     src={item.image || "/placeholder.svg"}
                     alt={item.title}
+                    width={400}
+                    height={192}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    priority={index < 6}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-60`}></div>
                   <div className="absolute top-4 left-4">

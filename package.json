@@ -7,6 +7,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
+    "analyze": "ANALYZE=true next build",
     "db:migrate": "tsx scripts/migrate.ts",
     "db:seed": "tsx db/seed.ts",
     "db:generate": "drizzle-kit generate",
@@ -40,6 +41,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.2.16",
     "@types/bcryptjs": "^2.4.6",
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22",

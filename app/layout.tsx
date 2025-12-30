@@ -8,6 +8,11 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+  preload: true,
+  adjustFontFallback: true,
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  fontDisplay: "swap",
 })
 
 export const metadata: Metadata = {
@@ -81,6 +86,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect to external origins */}
+        <link rel="preconnect" href="https://xiamenunion.com" crossOrigin="anonymous" />
+      </head>
       <body className={inter.className}>
         <ErrorBoundary>{children}</ErrorBoundary>
       </body>
