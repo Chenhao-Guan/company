@@ -1,15 +1,13 @@
 import dynamic from 'next/dynamic'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { Skeleton } from "@/components/ui/skeleton" // Optional: for a nice loading state
 
 // Dynamically import the client component with SSR turned off
-const HomeContent = dynamic(() => import('@/components/home-content'), { 
+const HomeContent = dynamic(() => import('@/components/home-content'), {
   ssr: false,
-  // Optional: Show a loading skeleton while the component loads on the client
   loading: () => (
-    <main className="p-4">
-      <Skeleton className="h-[60vh] w-full" />
+    <main className="flex items-center justify-center min-h-[60vh]">
+      <div className="animate-pulse text-gray-400">Loading...</div>
     </main>
   )
 })
