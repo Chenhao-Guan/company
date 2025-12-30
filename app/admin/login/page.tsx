@@ -1,30 +1,39 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { login } from '@/app/actions/auth'
 
 export default function AdminLoginPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const formRef = useRef<HTMLFormElement>(null)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
     setError('')
 
-    const formData = new FormData(e.currentTarget)
-    const result = await login(formData)
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        body: new FormData(e.currentTarget),
+      })
 
-    if (result.success) {
-      router.push('/admin')
-      router.refresh()
-    } else {
-      setError(result.message || 'Login failed')
+      const result = await response.json()
+
+      if (result.success) {
+        router.push('/admin')
+        router.refresh()
+      } else {
+        setError(result.message || 'Login failed')
+      }
+    } catch (err) {
+      console.error('Login error:', err)
+      setError('An error occurred. Please try again.')
     }
 
     setLoading(false)
