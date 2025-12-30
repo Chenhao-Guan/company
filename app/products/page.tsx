@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { ArrowRight, Search, ChevronLeft, ChevronRight } from "lucide-react"
 import dynamic from "next/dynamic"
@@ -8,7 +8,7 @@ import Image from "next/image"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { ProductGridSkeleton } from "@/components/product-skeleton"
-import { productCategories } from "@/data/products"
+import { productCategories, type Product } from "@/data/products"
 import { generateCollectionPageJsonLd, generateBreadcrumbJsonLd, generateProductJsonLd } from "@/lib/structured-data"
 
 const ProductDetailModal = dynamic(() => import("@/components/product-detail-modal"), {
@@ -18,10 +18,10 @@ const ProductDetailModal = dynamic(() => import("@/components/product-detail-mod
 
 export default function ProductsPage() {
   const ref = useRef(null)
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
-  const [products, setProducts] = useState<any[]>([])
+  const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 12
@@ -45,7 +45,7 @@ export default function ProductsPage() {
         setLoading(false)
 
         // Add Product structured data for each product
-        const productJsonLdScripts = data.map((product: any) => {
+        const productJsonLdScripts = data.map((product: Product) => {
           const script = document.createElement('script')
           script.type = 'application/ld+json'
           script.id = `product-jsonld-${product.id}`
@@ -55,7 +55,7 @@ export default function ProductsPage() {
         })
 
         return () => {
-          productJsonLdScripts.forEach((script) => script.remove())
+          productJsonLdScripts.forEach((script: HTMLScriptElement) => script.remove())
         }
       })
       .catch(err => {
@@ -77,7 +77,7 @@ export default function ProductsPage() {
       ])
 
       // Update or create collection page structured data
-      let collectionScript = document.getElementById('collection-jsonld')
+      let collectionScript = document.getElementById('collection-jsonld') as HTMLScriptElement | null
       if (!collectionScript) {
         collectionScript = document.createElement('script')
         collectionScript.id = 'collection-jsonld'
@@ -87,7 +87,7 @@ export default function ProductsPage() {
       collectionScript.textContent = JSON.stringify(categoryJsonLd)
 
       // Update or create breadcrumb structured data
-      let breadcrumbScript = document.getElementById('breadcrumb-jsonld')
+      let breadcrumbScript = document.getElementById('breadcrumb-jsonld') as HTMLScriptElement | null
       if (!breadcrumbScript) {
         breadcrumbScript = document.createElement('script')
         breadcrumbScript.id = 'breadcrumb-jsonld'

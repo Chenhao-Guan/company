@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
-import { Layers, Copy, Disc, Circle, CircleDot, Settings, Link2, ArrowRight, LucideIcon } from "lucide-react"
+import { Layers, Copy, Disc, Circle, CircleDot, Settings, Link2, ArrowRight } from "lucide-react"
 
 export default function ProductOverview() {
   const ref = useRef(null)

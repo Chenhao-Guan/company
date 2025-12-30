@@ -12,7 +12,6 @@ const ProductOverview = dynamic(() => import("@/components/product-overview"), {
       <div className="animate-pulse text-gray-400">Loading...</div>
     </div>
   ),
-  ssr: true,
 })
 
 const AboutSection = dynamic(() => import("@/components/about-section"), {
@@ -21,7 +20,6 @@ const AboutSection = dynamic(() => import("@/components/about-section"), {
       <div className="animate-pulse text-gray-400">Loading...</div>
     </div>
   ),
-  ssr: true,
 })
 
 const ContactSection = dynamic(() => import("@/components/contact-section"), {
@@ -30,7 +28,6 @@ const ContactSection = dynamic(() => import("@/components/contact-section"), {
       <div className="animate-pulse text-gray-400">Loading...</div>
     </div>
   ),
-  ssr: true,
 })
 
 export default function HomeContent() {

@@ -106,34 +106,36 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
       }
 
       // Insert image after every 2-3 paragraphs
-      if (imageIndex < news.contentImages!.length && (index + 1) % 3 === 0) {
-        const image = news.contentImages![imageIndex]
-        result.push(
-          <div
-            key={`image-${imageIndex}`}
-            className={`my-8 ${
-              image.position === "full"
-                ? "w-full"
-                : image.position === "left"
-                  ? "float-left mr-6 mb-4 w-1/2"
-                  : image.position === "right"
-                    ? "float-right ml-6 mb-4 w-1/2"
-                    : "mx-auto w-2/3"
-            }`}
-          >
-            <Image
-              src={image.url || "/placeholder.svg"}
-              alt={image.caption}
-              width={1200}
-              height={900}
-              className="w-full rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
-              onClick={() => setSelectedImage(image.url)}
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 66vw, 50vw"
-            />
-            <p className="text-sm text-gray-600 mt-2 italic text-center">{image.caption}</p>
-          </div>,
-        )
-        imageIndex++
+      if (news.contentImages && imageIndex < news.contentImages.length && (index + 1) % 3 === 0) {
+        const image = news.contentImages[imageIndex]
+        if (image) {
+          result.push(
+            <div
+              key={`image-${imageIndex}`}
+              className={`my-8 ${
+                image.position === "full"
+                  ? "w-full"
+                  : image.position === "left"
+                    ? "float-left mr-6 mb-4 w-1/2"
+                    : image.position === "right"
+                      ? "float-right ml-6 mb-4 w-1/2"
+                      : "mx-auto w-2/3"
+              }`}
+            >
+              <Image
+                src={image.url || "/placeholder.svg"}
+                alt={image.caption || "News image"}
+                width={1200}
+                height={900}
+                className="w-full rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                onClick={() => setSelectedImage(image.url)}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 66vw, 50vw"
+              />
+              <p className="text-sm text-gray-600 mt-2 italic text-center">{image.caption}</p>
+            </div>,
+          )
+          imageIndex++
+        }
       }
     })
 

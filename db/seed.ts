@@ -1,8 +1,8 @@
 import Database from 'better-sqlite3'
 import { drizzle } from 'drizzle-orm/better-sqlite3'
 import * as schema from '@/db/schema'
-import { products as staticProducts, productCategories } from '../data/products'
-import { news as staticNewsData, newsCategories } from '../data/news'
+import { products as staticProducts } from '../data/products'
+import { news as staticNewsData } from '../data/news'
 import bcrypt from 'bcryptjs'
 import path from 'path'
 

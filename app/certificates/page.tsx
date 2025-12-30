@@ -1,7 +1,7 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 import { Award, Shield, CheckCircle, LucideIcon, X, ArrowRight, Award as CertificateIcon, Leaf } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -30,8 +30,6 @@ interface Category {
 }
 
 export default function CertificatesPage() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
 
@@ -144,7 +142,7 @@ export default function CertificatesPage() {
       </section>
 
       {/* Filter Section */}
-      <section className="py-8 bg-white border-b" ref={ref}>
+      <section className="py-8 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-4 justify-center">
             {categories.map((category) => (

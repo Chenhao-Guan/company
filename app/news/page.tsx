@@ -1,7 +1,7 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect, Suspense } from "react"
+import { motion } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
 import { ArrowRight, Newspaper } from "lucide-react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
@@ -17,7 +17,6 @@ const NewsDetailModal = dynamic(() => import("@/components/news-detail-modal"), 
 
 export default function NewsPage() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [selectedNews, setSelectedNews] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [news, setNews] = useState<any[]>([])

@@ -114,9 +114,6 @@ export function generateProductJsonLd(product: Product) {
 
   const categoryName = productCategories[productCategories.findIndex(c => c.id === product.category)]?.name || product.category
 
-  // Extract engine brand from technical specs if available
-  const engineBrand = product.technicalSpecs?.['Engine Brand'] || product.brands[0] || 'Various'
-
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',

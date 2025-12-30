@@ -15,8 +15,8 @@ async function getStats() {
     .where(eq(news.published, true))
 
   return {
-    products: productCount[0].count,
-    news: newsCount[0].count,
+    products: productCount[0]?.count ?? 0,
+    news: newsCount[0]?.count ?? 0,
   }
 }
 

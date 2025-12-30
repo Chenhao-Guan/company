@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 
 interface MediaFile {
   url: string
@@ -101,7 +100,7 @@ export default function MediaLibrary({ onSelect, folder = 'upload', multiple = f
 
   function handleSelect() {
     if (onSelect && selected.length > 0) {
-      onSelect(multiple ? selected[0] : selected[0])
+      onSelect(selected[0]!)
     }
   }
 

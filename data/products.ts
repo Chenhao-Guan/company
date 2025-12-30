@@ -6,6 +6,7 @@ export interface Product {
   icon: string
   image: string
   gradient: string
+  price?: string
   specifications: string[]
   applications: string[]
   brands: string[]

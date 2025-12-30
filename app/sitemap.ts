@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { products } from '@/data/products'
 import { news } from '@/data/news'
 
 const baseUrl = 'https://xiamenunion.com'
