@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect, Suspense } from "react"
+import { useRef, useState, useEffect } from "react"
 import { ArrowRight, Search, ChevronLeft, ChevronRight } from "lucide-react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
@@ -18,7 +18,6 @@ const ProductDetailModal = dynamic(() => import("@/components/product-detail-mod
 
 export default function ProductsPage() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")

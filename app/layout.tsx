@@ -10,9 +10,7 @@ const inter = Inter({
   variable: "--font-inter",
   preload: true,
   adjustFontFallback: true,
-  subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  fontDisplay: "swap",
 })
 
 export const metadata: Metadata = {

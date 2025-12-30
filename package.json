@@ -6,12 +6,15 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
     "start": "next start",
     "analyze": "ANALYZE=true next build",
     "db:migrate": "tsx scripts/migrate.ts",
     "db:seed": "tsx db/seed.ts",
     "db:generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "precommit": "npm run lint && npm run type-check"
   },
   "dependencies": {
     "@radix-ui/react-label": "latest",

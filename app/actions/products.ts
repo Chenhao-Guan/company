@@ -1,11 +1,9 @@
 "use server"
 
-import { z } from 'zod'
 import { db } from '@/lib/db'
 import { products } from '@/db/schema'
 import { eq, desc } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
-import { productSchema } from '@/lib/validation'
 
 // Helper to parse JSON fields
 function safeJsonParse<T>(str: string | null, defaultValue: T): T {

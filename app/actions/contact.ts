@@ -18,8 +18,8 @@ export async function submitContactForm(formData: FormData) {
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
-      company: formData.get("company") as string,
-      phone: formData.get("phone") as string,
+      company: formData.get("company") as string | undefined,
+      phone: formData.get("phone") as string | undefined,
       subject: formData.get("subject") as string,
       message: formData.get("message") as string,
     }
@@ -30,11 +30,12 @@ export async function submitContactForm(formData: FormData) {
     const emailHTML = generateContactEmailHTML(validatedData)
 
     // 发送邮件
+    const ccEmail = process.env.CONTACT_CC_EMAIL
     const result = await sendEmail({
       to: process.env.CONTACT_EMAIL || "info@xiamenunion.com",
       subject: `New Contact Form: ${validatedData.subject}`,
       html: emailHTML,
-      cc: process.env.CONTACT_CC_EMAIL ? [process.env.CONTACT_CC_EMAIL] : undefined,
+      ...(ccEmail && { cc: [ccEmail] }),
     })
 
     if (result.success) {
