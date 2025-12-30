@@ -38,7 +38,7 @@ export default function HomeContent() {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8])
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <motion.div style={{ opacity }}>
         <HeroBanner />
       </motion.div>

@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     template: "%s | Xiamen Union Spares Ltd."
   },
   description:
-    "Xiamen Union Spares Ltd. is a professional industrial equipment spare parts supplier, providing hydraulic systems, electrical control, mechanical transmission and other industrial spare parts and technical support services.",
+    "Xiamen Union Spares Ltd. is a professional industrial equipment spare parts supplier, providing cylinder covers, pistons, cylinder liners, bearings, crankshafts, and connecting rods for marine and locomotive diesel engines.",
   keywords:
-    "industrial spare parts,hydraulic parts,electrical parts,mechanical parts,Xiamen spare parts,industrial equipment,cylinder cover,piston,cylinder liner,bearing,crankshaft,connecting rod",
+    "industrial spare parts,marine diesel engine parts,locomotive parts,cylinder cover,piston,cylinder liner,bearing,crankshaft,connecting rod,EMD,Sulzer,MAN,Wärtsilä,MaK,Daihatsu,Pielstick",
   authors: [{ name: "Xiamen Union Spares Ltd." }],
   creator: "Xiamen Union Spares Ltd.",
   publisher: "Xiamen Union Spares Ltd.",
@@ -31,26 +31,30 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  metadataBase: new URL('https://xiamenunion.com'),
+  alternates: {
+    canonical: 'https://xiamenunion.com',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://xiamenunion.com',
     title: 'Xiamen Union Spares Ltd. - Professional Industrial Spare Parts Supplier',
-    description: 'Professional industrial equipment spare parts supplier with 15+ years of experience, serving global industries with precision-engineered solutions.',
+    description: 'Professional industrial equipment spare parts supplier providing cylinder covers, pistons, cylinder liners, bearings, crankshafts, and connecting rods for marine and locomotive diesel engines.',
     siteName: 'Xiamen Union Spares Ltd.',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Xiamen Union Spares Ltd.',
+        alt: 'Xiamen Union Spares Ltd. - Industrial Spare Parts Supplier',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Xiamen Union Spares Ltd.',
-    description: 'Professional industrial equipment spare parts supplier',
+    title: 'Xiamen Union Spares Ltd. - Professional Industrial Spare Parts Supplier',
+    description: 'Professional industrial equipment spare parts supplier for marine and locomotive diesel engines',
     images: ['/twitter-image.jpg'],
   },
   robots: {
@@ -89,6 +93,13 @@ export default function RootLayout({
         <link rel="preconnect" href="https://xiamenunion.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
+        {/* Skip to content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:ring-2 focus:ring-blue-500"
+        >
+          Skip to main content
+        </a>
         <ErrorBoundary>{children}</ErrorBoundary>
       </body>
     </html>
