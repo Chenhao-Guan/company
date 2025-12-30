@@ -249,11 +249,6 @@ export default function ProductsPage() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <i className={`${product.icon} text-5xl text-white`}></i>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <span className="px-2 py-1 bg-white/90 text-gray-800 text-xs font-semibold rounded-full">
-                      {product.price}
-                    </span>
-                  </div>
                 </div>
 
                 <div className="p-6">

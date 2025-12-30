@@ -4,16 +4,7 @@ import { db } from '@/lib/db'
 import { products } from '@/db/schema'
 import { eq, desc } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
-
-// Helper to parse JSON fields
-function safeJsonParse<T>(str: string | null, defaultValue: T): T {
-  if (!str) return defaultValue
-  try {
-    return JSON.parse(str) as T
-  } catch {
-    return defaultValue
-  }
-}
+import { transformDbProduct, getFormDataArray, getDbResult } from '@/lib/utils'
 
 // Get all products (public)
 export async function getPublicProducts(filter?: { category?: string }) {
@@ -24,11 +15,12 @@ export async function getPublicProducts(filter?: { category?: string }) {
 
   const result = await query.orderBy(desc(products.createdAt))
 
+  let filtered = result
   if (filter?.category && filter.category !== 'all') {
-    return result.filter(p => p.category === filter.category)
+    filtered = result.filter(p => p.category === filter.category)
   }
 
-  return result
+  return filtered.map(transformDbProduct)
 }
 
 // Get product by ID (public)
@@ -39,17 +31,10 @@ export async function getPublicProductById(id: number) {
     .where(eq(products.id, id))
     .limit(1)
 
-  const product = result[0]
+  const product = getDbResult(result)
   if (!product || !product.published) return null
 
-  return {
-    ...product,
-    specifications: safeJsonParse<string[]>(product.specifications, []),
-    applications: safeJsonParse<string[]>(product.applications, []),
-    brands: safeJsonParse<string[]>(product.brands, []),
-    technicalSpecs: safeJsonParse<Record<string, string>>(product.technicalSpecs || null, {}),
-    gallery: safeJsonParse<string[]>(product.gallery || null, []),
-  }
+  return transformDbProduct(product)
 }
 
 // Get all products (admin)
@@ -68,25 +53,19 @@ export async function getProductById(id: number) {
     .where(eq(products.id, id))
     .limit(1)
 
-  if (!result[0]) return null
+  const product = getDbResult(result)
+  if (!product) return null
 
-  return {
-    ...result[0],
-    specifications: safeJsonParse<string[]>(result[0].specifications, []),
-    applications: safeJsonParse<string[]>(result[0].applications, []),
-    brands: safeJsonParse<string[]>(result[0].brands, []),
-    technicalSpecs: safeJsonParse<Record<string, string>>(result[0].technicalSpecs || null, {}),
-    gallery: safeJsonParse<string[]>(result[0].gallery || null, []),
-  }
+  return transformDbProduct(product)
 }
 
 // Create product
 export async function createProduct(formData: FormData) {
   try {
-    const specifications = formData.getAll('specifications[]').filter(Boolean) as string[]
-    const applications = formData.getAll('applications[]').filter(Boolean) as string[]
-    const brands = formData.getAll('brands[]').filter(Boolean) as string[]
-    const gallery = formData.getAll('gallery[]').filter(Boolean) as string[]
+    const specifications = getFormDataArray(formData, 'specifications[]')
+    const applications = getFormDataArray(formData, 'applications[]')
+    const brands = getFormDataArray(formData, 'brands[]')
+    const gallery = getFormDataArray(formData, 'gallery[]')
 
     const data = {
       title: formData.get('title') as string,
@@ -125,10 +104,10 @@ export async function createProduct(formData: FormData) {
 // Update product
 export async function updateProduct(id: number, formData: FormData) {
   try {
-    const specifications = formData.getAll('specifications[]').filter(Boolean) as string[]
-    const applications = formData.getAll('applications[]').filter(Boolean) as string[]
-    const brands = formData.getAll('brands[]').filter(Boolean) as string[]
-    const gallery = formData.getAll('gallery[]').filter(Boolean) as string[]
+    const specifications = getFormDataArray(formData, 'specifications[]')
+    const applications = getFormDataArray(formData, 'applications[]')
+    const brands = getFormDataArray(formData, 'brands[]')
+    const gallery = getFormDataArray(formData, 'gallery[]')
 
     const data = {
       title: formData.get('title') as string,

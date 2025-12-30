@@ -4,16 +4,7 @@ import { db } from '@/lib/db'
 import { news } from '@/db/schema'
 import { eq, desc } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
-
-// Helper to parse JSON fields
-function safeJsonParse<T>(str: string | null, defaultValue: T): T {
-  if (!str) return defaultValue
-  try {
-    return JSON.parse(str) as T
-  } catch {
-    return defaultValue
-  }
-}
+import { transformDbNews, getFormDataArray, getDbResult } from '@/lib/utils'
 
 // Get all news (public)
 export async function getPublicNews() {
@@ -23,12 +14,7 @@ export async function getPublicNews() {
     .where(eq(news.published, true))
     .orderBy(desc(news.date))
 
-  return result.map(item => ({
-    ...item,
-    tags: safeJsonParse<string[]>(item.tags || null, []),
-    gallery: safeJsonParse<string[]>(item.gallery || null, []),
-    contentImages: safeJsonParse<any[]>(item.contentImages || null, []),
-  }))
+  return result.map(transformDbNews)
 }
 
 // Get news by ID (public)
@@ -39,15 +25,10 @@ export async function getPublicNewsById(id: number) {
     .where(eq(news.id, id))
     .limit(1)
 
-  const item = result[0]
+  const item = getDbResult(result)
   if (!item || !item.published) return null
 
-  return {
-    ...item,
-    tags: safeJsonParse<string[]>(item.tags || null, []),
-    gallery: safeJsonParse<string[]>(item.gallery || null, []),
-    contentImages: safeJsonParse<any[]>(item.contentImages || null, []),
-  }
+  return transformDbNews(item)
 }
 
 // Get all news (admin)
@@ -57,12 +38,7 @@ export async function getAllNews() {
     .from(news)
     .orderBy(desc(news.date))
 
-  return result.map(item => ({
-    ...item,
-    tags: safeJsonParse<string[]>(item.tags || null, []),
-    gallery: safeJsonParse<string[]>(item.gallery || null, []),
-    contentImages: safeJsonParse<any[]>(item.contentImages || null, []),
-  }))
+  return result.map(transformDbNews)
 }
 
 // Get news by ID (admin)
@@ -73,21 +49,17 @@ export async function getNewsById(id: number) {
     .where(eq(news.id, id))
     .limit(1)
 
-  if (!result[0]) return null
+  const item = getDbResult(result)
+  if (!item) return null
 
-  return {
-    ...result[0],
-    tags: safeJsonParse<string[]>(result[0].tags || null, []),
-    gallery: safeJsonParse<string[]>(result[0].gallery || null, []),
-    contentImages: safeJsonParse<any[]>(result[0].contentImages || null, []),
-  }
+  return transformDbNews(item)
 }
 
 // Create news
 export async function createNews(formData: FormData) {
   try {
-    const tags = formData.getAll('tags[]').filter(Boolean) as string[]
-    const gallery = formData.getAll('gallery[]').filter(Boolean) as string[]
+    const tags = getFormDataArray(formData, 'tags[]')
+    const gallery = getFormDataArray(formData, 'gallery[]')
     const contentImages = formData.get('contentImages') as string || null
 
     const data = {
@@ -127,8 +99,8 @@ export async function createNews(formData: FormData) {
 // Update news
 export async function updateNews(id: number, formData: FormData) {
   try {
-    const tags = formData.getAll('tags[]').filter(Boolean) as string[]
-    const gallery = formData.getAll('gallery[]').filter(Boolean) as string[]
+    const tags = getFormDataArray(formData, 'tags[]')
+    const gallery = getFormDataArray(formData, 'gallery[]')
     const contentImages = formData.get('contentImages') as string || null
 
     const data = {
