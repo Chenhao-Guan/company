@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { login } from '@/app/actions/auth'
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -17,23 +18,13 @@ export default function AdminLoginPage() {
     setError('')
 
     const formData = new FormData(e.currentTarget)
+    const result = await login(formData)
 
-    try {
-      const res = await fetch('/admin/api/login', {
-        method: 'POST',
-        body: formData,
-      })
-
-      const data = await res.json()
-
-      if (data.success) {
-        router.push('/admin')
-        router.refresh()
-      } else {
-        setError(data.message || 'Login failed')
-      }
-    } catch (err) {
-      setError('An error occurred. Please try again.')
+    if (result.success) {
+      router.push('/admin')
+      router.refresh()
+    } else {
+      setError(result.message || 'Login failed')
     }
 
     setLoading(false)
