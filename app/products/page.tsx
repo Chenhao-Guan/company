@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ProductDetailModal from "@/components/product-detail-modal"
-import { products, productCategories } from "@/data/products"
+import { productCategories } from "@/data/products"
 
 export default function ProductsPage() {
   const ref = useRef(null)
@@ -13,10 +13,26 @@ export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [searchTerm, setSearchTerm] = useState("")
+  const [products, setProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
   // Fix scroll position on page load
   useEffect(() => {
     window.scrollTo(0, 0)
+  }, [])
+
+  // Fetch products from API
+  useEffect(() => {
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error('Failed to fetch products:', err)
+        setLoading(false)
+      })
   }, [])
 
   const filteredProducts = products.filter((product) => {

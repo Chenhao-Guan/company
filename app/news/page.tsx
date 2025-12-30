@@ -5,17 +5,33 @@ import { useRef, useState, useEffect } from "react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import NewsDetailModal from "@/components/news-detail-modal"
-import { news, newsCategories } from "@/data/news"
+import { newsCategories } from "@/data/news"
 
 export default function NewsPage() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [selectedNews, setSelectedNews] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
+  const [news, setNews] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
   // Fix scroll position on page load
   useEffect(() => {
     window.scrollTo(0, 0)
+  }, [])
+
+  // Fetch news from API
+  useEffect(() => {
+    fetch('/api/news')
+      .then(res => res.json())
+      .then(data => {
+        setNews(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error('Failed to fetch news:', err)
+        setLoading(false)
+      })
   }, [])
 
   const filteredNews = news.filter((item) => {
