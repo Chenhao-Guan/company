@@ -1,12 +1,17 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, Suspense } from "react"
 import { ArrowRight, Newspaper } from "lucide-react"
+import dynamic from "next/dynamic"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import NewsDetailModal from "@/components/news-detail-modal"
 import { newsCategories } from "@/data/news"
+
+const NewsDetailModal = dynamic(() => import("@/components/news-detail-modal"), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center p-8">Loading...</div>,
+})
 
 export default function NewsPage() {
   const ref = useRef(null)

@@ -58,6 +58,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                   <img
                     src={product.image || "/placeholder.svg"}
                     alt={product.title}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`}></div>
@@ -74,6 +75,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                         <img
                           src={image || "/placeholder.svg"}
                           alt={`${product.title} ${index + 1}`}
+                          loading="lazy"
                           className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                         />
                       </div>

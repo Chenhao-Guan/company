@@ -200,6 +200,7 @@ export default function CertificatesPage() {
                     <img
                       src={certificate.image}
                       alt={certificate.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>

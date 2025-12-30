@@ -94,6 +94,7 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
             <img
               src={image.url || "/placeholder.svg"}
               alt={image.caption}
+              loading="lazy"
               className="w-full rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
               onClick={() => setSelectedImage(image.url)}
             />
@@ -138,6 +139,7 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
               <img
                 src={news.image || "/placeholder.svg"}
                 alt={news.title}
+                loading="lazy"
                 className="w-full h-full object-cover opacity-50"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -199,6 +201,7 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
                       <img
                         src={image || "/placeholder.svg"}
                         alt={`Gallery image ${index + 1}`}
+                        loading="lazy"
                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                         onClick={() => setSelectedImage(image)}
                       />

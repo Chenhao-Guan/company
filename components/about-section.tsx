@@ -66,6 +66,7 @@ export default function AboutSection() {
               <img
                 src="/placeholder.svg?height=500&width=600"
                 alt="Company Facility"
+                loading="lazy"
                 className="w-full h-96 object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

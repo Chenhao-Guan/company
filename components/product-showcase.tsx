@@ -137,6 +137,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
                 <img
                   src={product.image || "/placeholder.svg"}
                   alt={product.title}
+                  loading="lazy"
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`}></div>

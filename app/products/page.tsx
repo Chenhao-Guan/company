@@ -1,12 +1,17 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, Suspense } from "react"
 import { ArrowRight, Search } from "lucide-react"
+import dynamic from "next/dynamic"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import ProductDetailModal from "@/components/product-detail-modal"
 import { productCategories } from "@/data/products"
+
+const ProductDetailModal = dynamic(() => import("@/components/product-detail-modal"), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center p-8">Loading...</div>,
+})
 
 export default function ProductsPage() {
   const ref = useRef(null)
