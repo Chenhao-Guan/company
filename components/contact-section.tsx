@@ -156,7 +156,9 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
+            <h3 id="contact-form-title" className="text-2xl font-bold text-gray-900 mb-6">
+              Send us a Message
+            </h3>
 
             {/* Status Messages */}
             {submitStatus.type && (
@@ -168,19 +170,27 @@ export default function ContactSection() {
                 }`}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
+                role="alert"
+                aria-live="polite"
               >
                 <div className="flex items-center">
                   {submitStatus.type === "success" ? (
-                    <CheckCircle className="w-5 h-5 mr-2" />
+                    <CheckCircle className="w-5 h-5 mr-2" aria-hidden="true" />
                   ) : (
-                    <AlertCircle className="w-5 h-5 mr-2" />
+                    <AlertCircle className="w-5 h-5 mr-2" aria-hidden="true" />
                   )}
-                  {submitStatus.message}
+                  <span>{submitStatus.message}</span>
                 </div>
               </motion.div>
             )}
 
-            <form id="contact-form" action={handleSubmit} className="space-y-6">
+            <form
+              id="contact-form"
+              action={handleSubmit}
+              className="space-y-6"
+              noValidate
+              aria-labelledby="contact-form-title"
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">

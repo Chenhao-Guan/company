@@ -1,0 +1,27 @@
+{
+  "name": "Xiamen Union Spares Ltd. - Industrial Spare Parts Supplier",
+  "short_name": "Union Spares",
+  "description": "Professional industrial equipment spare parts supplier providing cylinder covers, pistons, cylinder liners, bearings, crankshafts, and connecting rods for marine and locomotive diesel engines.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "industrial", "manufacturing"],
+  "lang": "en",
+  "dir": "ltr"
+}

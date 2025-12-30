@@ -1,13 +1,16 @@
 import type { MetadataRoute } from 'next'
+import { products } from '@/data/products'
+import { news } from '@/data/news'
+
+const baseUrl = 'https://xiamenunion.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://xiamenunion.com'
-
-  return [
+  // Static pages
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'weekly',
       priority: 1,
     },
     {
@@ -19,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/news`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
@@ -29,4 +32,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
   ]
+
+  // Product category filter pages
+  const productCategories = [
+    'cylinder-cover',
+    'piston',
+    'cylinder-liner',
+    'bearing',
+    'crankshaft',
+    'connecting-rod',
+  ]
+
+  const categoryPages: MetadataRoute.Sitemap = productCategories.map((category) => ({
+    url: `${baseUrl}/products?category=${category}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  // News item pages (query-based)
+  const newsPages: MetadataRoute.Sitemap = news.map((item) => ({
+    url: `${baseUrl}/news?id=${item.id}`,
+    lastModified: new Date(item.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...staticPages, ...categoryPages, ...newsPages]
 }

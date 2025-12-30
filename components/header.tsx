@@ -58,6 +58,7 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
+      role="banner"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -67,14 +68,20 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             onClick={() => router.push("/")}
+            role="link"
+            tabIndex={0}
+            aria-label="Xiamen Union Spares - Go to home page"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') router.push("/")
+            }}
           >
             <div className="w-12 h-12 flex items-center justify-center">
               <Image
-                src="/logo.png" // The path to your image in the `public` folder
+                src="/logo.png"
                 alt="Xiamen Union Spares Logo"
-                width={40} // Desired width in pixels
-                height={40} // Desired height in pixels
-                priority // Add this if the logo is above-the-fold to load it faster
+                width={40}
+                height={40}
+                priority
               />
             </div>
             <div>
@@ -86,7 +93,7 @@ export default function Header() {
           </motion.div>
 
           {/* Desktop Navigation - Always Visible */}
-          <nav className="flex items-center space-x-6">
+          <nav className="flex items-center space-x-6" role="navigation" aria-label="Main navigation">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.name}
@@ -102,6 +109,8 @@ export default function Header() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
+                aria-label={item.name}
+                aria-current={pathname === item.href ? "page" : undefined}
               >
                 {item.name}
               </motion.button>

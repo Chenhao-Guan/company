@@ -117,12 +117,21 @@ export default function NewsPage() {
               {filteredNews.map((item, index) => (
               <motion.article
                 key={item.id}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-blue-500"
                 initial={{ opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ y: -5 }}
                 onClick={() => setSelectedNews(item)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Read article: ${item.title}`}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setSelectedNews(item)
+                  }
+                }}
               >
                 <div className="relative overflow-hidden">
                   <img

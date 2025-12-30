@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion"
 import type { Product } from "@/data/products"
 import { X, Check, Factory } from "lucide-react"
+import { useEffect, useRef } from "react"
 
 interface ProductDetailModalProps {
   product: Product | null
@@ -10,6 +11,32 @@ interface ProductDetailModalProps {
 }
 
 export default function ProductDetailModal({ product, onClose }: ProductDetailModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose()
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape)
+    return () => document.removeEventListener("keydown", handleEscape)
+  }, [onClose])
+
+  // Focus trap inside modal
+  useEffect(() => {
+    if (product && modalRef.current) {
+      const focusableElements = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const firstElement = focusableElements[0] as HTMLElement
+      if (firstElement) {
+        firstElement.focus()
+      }
+    }
+  }, [product])
+
   if (!product) return null
 
   return (
@@ -31,6 +58,10 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
 
         {/* Modal */}
         <motion.div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={`product-title-${product.id}`}
           className="relative bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -40,11 +71,17 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900">{product.title}</h2>
+              <h2 id={`product-title-${product.id}`} className="text-3xl font-bold text-gray-900">
+                {product.title}
+              </h2>
               <p className="text-gray-600 mt-2 text-lg">{product.description}</p>
             </div>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <X className="w-5 h-5 text-gray-500" />
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Close product details modal"
+            >
+              <X className="w-5 h-5 text-gray-500" aria-hidden="true" />
             </button>
           </div>
 
@@ -74,7 +111,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                       <div key={index} className="aspect-square rounded-lg overflow-hidden">
                         <img
                           src={image || "/placeholder.svg"}
-                          alt={`${product.title} ${index + 1}`}
+                          alt={`${product.title} - Additional view ${index + 1}`}
                           loading="lazy"
                           className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                         />

@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import type { NewsItem } from "@/data/news"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { X, Calendar, Clock, User } from "lucide-react"
 
 // Social media SVG icons
@@ -57,6 +57,35 @@ interface NewsDetailModalProps {
 
 export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (selectedImage) {
+          setSelectedImage(null)
+        } else {
+          onClose()
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape)
+    return () => document.removeEventListener("keydown", handleEscape)
+  }, [onClose, selectedImage])
+
+  // Focus trap inside modal
+  useEffect(() => {
+    if (news && modalRef.current) {
+      const focusableElements = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const firstElement = focusableElements[0] as HTMLElement
+      if (firstElement) {
+        firstElement.focus()
+      }
+    }
+  }, [news])
 
   if (!news) return null
 
@@ -127,6 +156,10 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
 
         {/* Modal */}
         <motion.div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={`news-title-${news.id}`}
           className="relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -147,7 +180,9 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
                 <span className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm font-semibold rounded-full mb-3 inline-block">
                   {news.categoryName}
                 </span>
-                <h2 className="text-4xl font-bold mb-3 leading-tight">{news.title}</h2>
+                <h2 id={`news-title-${news.id}`} className="text-4xl font-bold mb-3 leading-tight">
+                  {news.title}
+                </h2>
                 <div className="flex items-center text-gray-200 space-x-4">
                   <div className="flex items-center">
                     <Calendar className="w-4 h-4 mr-2" />
@@ -167,8 +202,9 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors backdrop-blur-sm"
+              aria-label="Close news article modal"
             >
-              <X className="w-5 h-5 text-white" />
+              <X className="w-5 h-5 text-white" aria-hidden="true" />
             </button>
           </div>
 
@@ -200,7 +236,7 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
                     <div key={index} className="aspect-video rounded-lg overflow-hidden">
                       <img
                         src={image || "/placeholder.svg"}
-                        alt={`Gallery image ${index + 1}`}
+                        alt={`${news.title} - Photo ${index + 1}`}
                         loading="lazy"
                         className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                         onClick={() => setSelectedImage(image)}

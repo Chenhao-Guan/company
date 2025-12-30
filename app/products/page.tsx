@@ -8,6 +8,7 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { ProductGridSkeleton } from "@/components/product-skeleton"
 import { productCategories } from "@/data/products"
+import { generateCollectionPageJsonLd, generateBreadcrumbJsonLd, generateProductJsonLd } from "@/lib/structured-data"
 
 const ProductDetailModal = dynamic(() => import("@/components/product-detail-modal"), {
   ssr: false,
@@ -35,12 +36,60 @@ export default function ProductsPage() {
       .then(data => {
         setProducts(data)
         setLoading(false)
+
+        // Add Product structured data for each product
+        const productJsonLdScripts = data.map((product: any) => {
+          const script = document.createElement('script')
+          script.type = 'application/ld+json'
+          script.id = `product-jsonld-${product.id}`
+          script.text = JSON.stringify(generateProductJsonLd(product))
+          document.head.appendChild(script)
+          return script
+        })
+
+        return () => {
+          productJsonLdScripts.forEach((script) => script.remove())
+        }
       })
       .catch(err => {
         console.error('Failed to fetch products:', err)
         setLoading(false)
       })
   }, [])
+
+  // Update structured data when category changes
+  useEffect(() => {
+    if (products.length > 0) {
+      const categoryJsonLd = generateCollectionPageJsonLd(
+        products,
+        selectedCategory
+      )
+      const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+        { name: 'Home', url: 'https://xiamenunion.com' },
+        { name: 'Products', url: 'https://xiamenunion.com/products' },
+      ])
+
+      // Update or create collection page structured data
+      let collectionScript = document.getElementById('collection-jsonld')
+      if (!collectionScript) {
+        collectionScript = document.createElement('script')
+        collectionScript.id = 'collection-jsonld'
+        collectionScript.type = 'application/ld+json'
+        document.head.appendChild(collectionScript)
+      }
+      collectionScript.textContent = JSON.stringify(categoryJsonLd)
+
+      // Update or create breadcrumb structured data
+      let breadcrumbScript = document.getElementById('breadcrumb-jsonld')
+      if (!breadcrumbScript) {
+        breadcrumbScript = document.createElement('script')
+        breadcrumbScript.id = 'breadcrumb-jsonld'
+        breadcrumbScript.type = 'application/ld+json'
+        document.head.appendChild(breadcrumbScript)
+      }
+      breadcrumbScript.textContent = JSON.stringify(breadcrumbJsonLd)
+    }
+  }, [products, selectedCategory])
 
   const filteredProducts = products.filter((product) => {
     const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
@@ -78,25 +127,27 @@ export default function ProductsPage() {
       </section>
 
       {/* Search and Filter Section */}
-      <section className="py-8 bg-gray-50 border-b" ref={ref}>
+      <section className="py-8 bg-gray-50 border-b" ref={ref} aria-label="Product search and filters">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 items-center">
             {/* Search Bar */}
             <div className="flex-1 max-w-md">
               <div className="relative">
-                <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" aria-hidden="true"></i>
                 <input
                   type="text"
                   placeholder="Search products, brands..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  aria-label="Search products"
+                  role="searchbox"
                 />
               </div>
             </div>
 
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by product category">
               {productCategories.map((category) => (
                 <motion.button
                   key={category.id}
@@ -108,8 +159,10 @@ export default function ProductsPage() {
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`Filter by ${category.name}`}
+                  aria-pressed={selectedCategory === category.id}
                 >
-                  <i className={`${category.icon} mr-2`}></i>
+                  <i className={`${category.icon} mr-2`} aria-hidden="true"></i>
                   {category.name}
                 </motion.button>
               ))}
@@ -142,12 +195,21 @@ export default function ProductsPage() {
               {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-blue-500"
                 initial={{ opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ y: -5 }}
                 onClick={() => setSelectedProduct(product)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View details for ${product.title}`}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setSelectedProduct(product)
+                  }
+                }}
               >
                 <div className="relative overflow-hidden">
                   <img

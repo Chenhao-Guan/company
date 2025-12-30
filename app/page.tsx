@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { generateOrganizationJsonLd, generateWebPageJsonLd } from "@/lib/structured-data"
 
 // Dynamically import the client component with SSR turned off
 const HomeContent = dynamic(() => import('@/components/home-content'), {
@@ -13,11 +14,30 @@ const HomeContent = dynamic(() => import('@/components/home-content'), {
 })
 
 export default function HomePage() {
+  const organizationJsonLd = generateOrganizationJsonLd()
+  const webPageJsonLd = generateWebPageJsonLd(
+    '',
+    'Xiamen Union Spares Ltd. - Professional Industrial Spare Parts Supplier',
+    'Professional industrial equipment spare parts supplier providing cylinder covers, pistons, cylinder liners, bearings, crankshafts, and connecting rods.'
+  )
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <HomeContent />
-      <Footer />
-    </div>
+    <>
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
+
+      <div className="min-h-screen bg-white">
+        <Header />
+        <HomeContent />
+        <Footer />
+      </div>
+    </>
   )
 }
