@@ -58,6 +58,12 @@ export default async function AdminLayout({
               News
             </Link>
             <Link
+              href="/admin/media"
+              className="block px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100"
+            >
+              Media Library
+            </Link>
+            <Link
               href="/admin/home"
               className="block px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100"
             >
