@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
+import { Layers, Copy, Disc, Circle, CircleDot, Settings, Link2, ArrowRight, LucideIcon } from "lucide-react"
 
 export default function ProductOverview() {
   const ref = useRef(null)
@@ -10,56 +11,56 @@ export default function ProductOverview() {
   const router = useRouter()
 
 const productCategories = [
-    {
-      title: "All Products",
-      description: "Browse our complete catalog of high-quality products",
-      icon: "fas fa-th-large",
-      gradient: "from-blue-500 to-blue-600",
-      count: "1000+ Products",
-    },
-    {
-      title: "Cylinder Cover",
-      description: "Durable and reliable cylinder covers for various applications",
-      icon: "fas fa-clone",
-      gradient: "from-purple-500 to-purple-600",
-      count: "150+ Products",
-    },
-    {
-      title: "Piston",
-      description: "High-performance pistons designed for maximum efficiency",
-      icon: "fas fa-compact-disc",
-      gradient: "from-green-500 to-green-600",
-      count: "200+ Products",
-    },
-    {
-      title: "Cylinder Liner",
-      description: "Precision-engineered cylinder liners for optimal function",
-      icon: "fas fa-life-ring",
-      gradient: "from-orange-500 to-orange-600",
-      count: "180+ Products",
-    },
-    {
-      title: "Bearing & Bearing Bush",
-      description: "A wide selection of bearings and bushes for smooth operation",
-      icon: "fas fa-ring",
-      gradient: "from-red-500 to-red-600",
-      count: "300+ Products",
-    },
-    {
-      title: "Crankshaft",
-      description: "Robust crankshafts built to withstand extreme conditions",
-      icon: "fas fa-cogs",
-      gradient: "from-cyan-500 to-cyan-600",
-      count: "90+ Products",
-    },
-    {
-      title: "Connecting Rod",
-      description: "Strong and lightweight connecting rods for superior performance",
-      icon: "fas fa-link",
-      gradient: "from-teal-500 to-teal-600",
-      count: "120+ Products",
-    },
-  ]
+    {
+      title: "All Products",
+      description: "Browse our complete catalog of high-quality products",
+      icon: Layers,
+      gradient: "from-blue-500 to-blue-600",
+      count: "1000+ Products",
+    },
+    {
+      title: "Cylinder Cover",
+      description: "Durable and reliable cylinder covers for various applications",
+      icon: Copy,
+      gradient: "from-purple-500 to-purple-600",
+      count: "150+ Products",
+    },
+    {
+      title: "Piston",
+      description: "High-performance pistons designed for maximum efficiency",
+      icon: Disc,
+      gradient: "from-green-500 to-green-600",
+      count: "200+ Products",
+    },
+    {
+      title: "Cylinder Liner",
+      description: "Precision-engineered cylinder liners for optimal function",
+      icon: Circle,
+      gradient: "from-orange-500 to-orange-600",
+      count: "180+ Products",
+    },
+    {
+      title: "Bearing & Bearing Bush",
+      description: "A wide selection of bearings and bushes for smooth operation",
+      icon: CircleDot,
+      gradient: "from-red-500 to-red-600",
+      count: "300+ Products",
+    },
+    {
+      title: "Crankshaft",
+      description: "Robust crankshafts built to withstand extreme conditions",
+      icon: Settings,
+      gradient: "from-cyan-500 to-cyan-600",
+      count: "90+ Products",
+    },
+    {
+      title: "Connecting Rod",
+      description: "Strong and lightweight connecting rods for superior performance",
+      icon: Link2,
+      gradient: "from-teal-500 to-teal-600",
+      count: "120+ Products",
+    },
+  ]
 
   return (
     <section id="products" className="py-20 bg-gray-50" ref={ref}>
@@ -80,7 +81,7 @@ const productCategories = [
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <i className="fas fa-th-large mr-2"></i>
+            <Layers className="w-5 h-5 mr-2 inline" />
             View All Products
           </motion.button>
         </motion.div>
@@ -99,7 +100,7 @@ const productCategories = [
               <div className="relative overflow-hidden h-32">
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-90`}></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <i className={`${category.icon} text-5xl text-white`}></i>
+                  <category.icon className="w-16 h-16 text-white" />
                 </div>
                 <div className="absolute top-4 right-4">
                   <span className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm font-semibold rounded-full">
@@ -117,7 +118,7 @@ const productCategories = [
                   className="text-blue-600 font-semibold hover:text-blue-800 transition-colors flex items-center"
                   whileHover={{ x: 5 }}
                 >
-                  Explore Products <i className="fas fa-arrow-right ml-2"></i>
+                  Explore Products <ArrowRight className="w-4 h-4 ml-2" />
                 </motion.div>
               </div>
             </motion.div>

@@ -2,16 +2,17 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { Calendar, Package, Handshake, Star, Settings, Check } from "lucide-react"
 
 export default function AboutSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const stats = [
-    { number: "15+", label: "Years Experience", icon: "fas fa-calendar-alt" },
-    { number: "10000+", label: "Product Models", icon: "fas fa-boxes" },
-    { number: "500+", label: "Partner Clients", icon: "fas fa-handshake" },
-    { number: "99%", label: "Customer Satisfaction", icon: "fas fa-star" },
+    { number: "15+", label: "Years Experience", icon: Calendar },
+    { number: "10000+", label: "Product Models", icon: Package },
+    { number: "500+", label: "Partner Clients", icon: Handshake },
+    { number: "99%", label: "Customer Satisfaction", icon: Star },
   ]
 
   return (
@@ -46,7 +47,7 @@ export default function AboutSection() {
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <i className={`${stat.icon} text-3xl text-blue-600 mb-2`}></i>
+                  <stat.icon className="w-8 h-8 text-blue-600 mb-2 mx-auto" />
                   <div className="text-3xl font-bold text-gray-900 mb-1">{stat.number}</div>
                   <div className="text-sm text-gray-600">{stat.label}</div>
                 </motion.div>
@@ -80,7 +81,7 @@ export default function AboutSection() {
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
             >
-              <i className="fas fa-cog text-white text-2xl"></i>
+              <Settings className="w-10 h-10 text-white" />
             </motion.div>
 
             <motion.div
@@ -88,7 +89,7 @@ export default function AboutSection() {
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
             >
-              <i className="fas fa-check text-white text-xl"></i>
+              <Check className="w-8 h-8 text-white" />
             </motion.div>
           </motion.div>
         </div>

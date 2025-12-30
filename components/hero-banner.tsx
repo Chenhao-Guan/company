@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { Info, Phone } from "lucide-react"
 
 export default function HeroBanner() {
   const ref = useRef(null)
@@ -111,7 +112,7 @@ export default function HeroBanner() {
                 }
               }}
             >
-              <i className="fas fa-info-circle mr-2"></i>
+              <Info className="w-5 h-5 mr-2 inline" />
               Learn More
             </motion.button>
 
@@ -126,7 +127,7 @@ export default function HeroBanner() {
                 }
               }}
             >
-              <i className="fas fa-phone mr-2"></i>
+              <Phone className="w-5 h-5 mr-2 inline" />
               Contact Us
             </motion.button>
           </motion.div>

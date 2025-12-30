@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
 import { submitContactForm } from "@/app/actions/contact"
+import { MapPin, Phone, Mail, Clock, CheckCircle, AlertCircle, Send } from "lucide-react"
 
 export default function ContactSection() {
   const ref = useRef(null)
@@ -76,7 +77,7 @@ export default function ContactSection() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-map-marker-alt text-white"></i>
+                  <MapPin className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900">Address</h4>
@@ -96,7 +97,7 @@ export default function ContactSection() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="flex-shrink-0 w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-phone text-white"></i>
+                  <Phone className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900">Phone</h4>
@@ -114,7 +115,7 @@ export default function ContactSection() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-envelope text-white"></i>
+                  <Mail className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900">Email</h4>
@@ -132,7 +133,7 @@ export default function ContactSection() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="flex-shrink-0 w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center">
-                  <i className="fas fa-clock text-white"></i>
+                  <Clock className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900">Business Hours</h4>
@@ -169,9 +170,11 @@ export default function ContactSection() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <div className="flex items-center">
-                  <i
-                    className={`fas ${submitStatus.type === "success" ? "fa-check-circle" : "fa-exclamation-circle"} mr-2`}
-                  ></i>
+                  {submitStatus.type === "success" ? (
+                    <CheckCircle className="w-5 h-5 mr-2" />
+                  ) : (
+                    <AlertCircle className="w-5 h-5 mr-2" />
+                  )}
                   {submitStatus.message}
                 </div>
               </motion.div>
@@ -280,7 +283,7 @@ export default function ContactSection() {
                   </div>
                 ) : (
                   <div className="flex items-center justify-center">
-                    <i className="fas fa-paper-plane mr-2"></i>
+                    <Send className="w-5 h-5 mr-2" />
                     Send Message
                   </div>
                 )}
