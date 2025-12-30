@@ -6,6 +6,7 @@ import { ArrowRight, Search } from "lucide-react"
 import dynamic from "next/dynamic"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { ProductGridSkeleton } from "@/components/product-skeleton"
 import { productCategories } from "@/data/products"
 
 const ProductDetailModal = dynamic(() => import("@/components/product-detail-modal"), {
@@ -134,8 +135,11 @@ export default function ProductsPage() {
             <p className="text-gray-600">Showing {filteredProducts.length} products</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product, index) => (
+          {loading ? (
+            <ProductGridSkeleton count={8} />
+          ) : filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
@@ -187,10 +191,9 @@ export default function ProductsPage() {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
-
-          {filteredProducts.length === 0 && (
+              ))}
+            </div>
+          ) : (
             <div className="text-center py-12">
               <Search className="w-16 h-16 text-gray-400 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No products found</h3>

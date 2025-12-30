@@ -6,6 +6,7 @@ import { ArrowRight, Newspaper } from "lucide-react"
 import dynamic from "next/dynamic"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+import { NewsGridSkeleton } from "@/components/news-skeleton"
 import { newsCategories } from "@/data/news"
 
 const NewsDetailModal = dynamic(() => import("@/components/news-detail-modal"), {
@@ -109,8 +110,11 @@ export default function NewsPage() {
             <p className="text-gray-600">{filteredNews.length} articles available</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredNews.map((item, index) => (
+          {loading ? (
+            <NewsGridSkeleton count={6} />
+          ) : filteredNews.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredNews.map((item, index) => (
               <motion.article
                 key={item.id}
                 className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
@@ -174,10 +178,9 @@ export default function NewsPage() {
                   </motion.div>
                 </div>
               </motion.article>
-            ))}
-          </div>
-
-          {filteredNews.length === 0 && (
+              ))}
+            </div>
+          ) : (
             <div className="text-center py-12">
               <Newspaper className="w-16 h-16 text-gray-400 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No news found</h3>
