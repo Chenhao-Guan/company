@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { Calendar, ArrowRight } from "lucide-react"
 
 interface NewsSectionProps {
   onNewsSelect: (news: any) => void
@@ -121,7 +122,7 @@ export default function NewsSection({ onNewsSelect }: NewsSectionProps) {
 
               <div className="p-6">
                 <div className="flex items-center text-sm text-gray-500 mb-3">
-                  <i className="fas fa-calendar-alt mr-2"></i>
+                  <Calendar className="w-4 h-4 mr-2" />
                   {item.date}
                 </div>
 
@@ -132,7 +133,7 @@ export default function NewsSection({ onNewsSelect }: NewsSectionProps) {
                 <p className="text-gray-600 text-sm mb-4 line-clamp-3">{item.excerpt}</p>
 
                 <motion.div className="flex items-center text-blue-600 font-semibold text-sm" whileHover={{ x: 5 }}>
-                  Read More <i className="fas fa-arrow-right ml-2"></i>
+                  Read More <ArrowRight className="w-4 h-4 ml-2" />
                 </motion.div>
               </div>
             </motion.article>

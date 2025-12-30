@@ -1,6 +1,32 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { Settings, Mail, Phone, MapPin, Clock, QrCode } from "lucide-react"
+
+// SVG icons for WeChat and QQ (not available in Lucide)
+const WeChatIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M8.5 13.5A1.5 1.5 0 1 1 7 12a1.5 1.5 0 0 1 1.5 1.5zm7 0A1.5 1.5 0 1 1 14 12a1.5 1.5 0 0 1 1.5 1.5zM12 2C6.5 2 2 6 2 11c0 2.5 1 4.8 2.7 6.5L3 22l5-1.5c2 1.2 4 1.5 6 1.5 5.5 0 10-4 10-9S17.5 2 12 2z" />
+  </svg>
+)
+
+const QQIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 2C6.5 2 2 6 2 11c0 2.5 1 4.8 2.7 6.5L3 22l5-1.5c2 1.2 4 1.5 6 1.5 5.5 0 10-4 10-9S17.5 2 12 2z" />
+    <circle cx="8.5" cy="10.5" r="1.5" />
+    <circle cx="15.5" cy="10.5" r="1.5" />
+  </svg>
+)
 
 export default function Footer() {
   const quickLinks = [
@@ -21,10 +47,10 @@ export default function Footer() {
   ]
 
   const socialLinks = [
-    { icon: "fab fa-weixin", name: "WeChat", href: "#contact" },
-    { icon: "fab fa-qq", name: "QQ", href: "#contact" },
-    { icon: "fas fa-envelope", name: "Email", href: "#contact" },
-    { icon: "fas fa-phone", name: "Phone", href: "#contact" },
+    { icon: WeChatIcon, name: "WeChat", href: "#contact" },
+    { icon: QQIcon, name: "QQ", href: "#contact" },
+    { icon: Mail, name: "Email", href: "#contact" },
+    { icon: Phone, name: "Phone", href: "#contact" },
   ]
 
   const scrollToSection = (href: string) => {
@@ -47,7 +73,7 @@ export default function Footer() {
           >
             <div className="flex items-center space-x-3 mb-6">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                <i className="fas fa-cogs text-white text-lg"></i>
+                <Settings className="text-white w-5 h-5" />
               </div>
               <div>
                 <h3 className="text-xl font-bold">Xiamen Union Spares</h3>
@@ -68,7 +94,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <i className={`${social.icon} text-lg`}></i>
+                  <social.icon className="w-5 h-5" />
                 </motion.button>
               ))}
             </div>
@@ -126,7 +152,7 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-6">Contact Information</h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <i className="fas fa-map-marker-alt text-blue-500 mt-1"></i>
+                <MapPin className="text-blue-500 w-5 h-5 mt-0.5" />
                 <div>
                   <p className="text-gray-400">
                     Software Park Phase II, Siming District
@@ -136,15 +162,15 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <i className="fas fa-phone text-blue-500"></i>
+                <Phone className="text-blue-500 w-5 h-5" />
                 <p className="text-gray-400">+86 592-1234567</p>
               </div>
               <div className="flex items-center space-x-3">
-                <i className="fas fa-envelope text-blue-500"></i>
+                <Mail className="text-blue-500 w-5 h-5" />
                 <p className="text-gray-400">info@xiamenunion.com</p>
               </div>
               <div className="flex items-center space-x-3">
-                <i className="fas fa-clock text-blue-500"></i>
+                <Clock className="text-blue-500 w-5 h-5" />
                 <p className="text-gray-400">Monday to Friday 8:00-18:00</p>
               </div>
             </div>
@@ -152,7 +178,7 @@ export default function Footer() {
             {/* QR Code */}
             <div className="mt-6 p-4 bg-gray-800 rounded-lg text-center">
               <div className="w-20 h-20 bg-white rounded-lg mx-auto mb-2 flex items-center justify-center">
-                <i className="fas fa-qrcode text-gray-800 text-2xl"></i>
+                <QrCode className="text-gray-800 w-10 h-10" />
               </div>
               <p className="text-sm text-gray-400">Scan to Follow Us</p>
             </div>

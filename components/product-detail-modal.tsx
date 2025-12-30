@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import type { Product } from "@/data/products"
+import { X, Check, Factory } from "lucide-react"
 
 interface ProductDetailModalProps {
   product: Product | null
@@ -43,7 +44,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
               <p className="text-gray-600 mt-2 text-lg">{product.description}</p>
             </div>
             <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <i className="fas fa-times text-xl text-gray-500"></i>
+              <X className="w-5 h-5 text-gray-500" />
             </button>
           </div>
 
@@ -61,7 +62,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                   />
                   <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`}></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <i className={`${product.icon} text-8xl text-white`}></i>
+                    <span className={`${product.icon} text-8xl text-white`}></span>
                   </div>
                 </div>
 
@@ -107,7 +108,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                     <ul className="space-y-2">
                       {product.specifications.map((spec, index) => (
                         <li key={index} className="flex items-center text-gray-600">
-                          <i className="fas fa-check text-green-500 mr-3"></i>
+                          <Check className="w-4 h-4 text-green-500 mr-3" />
                           {spec}
                         </li>
                       ))}
@@ -139,7 +140,7 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
                         key={index}
                         className="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
-                        <i className="fas fa-industry text-gray-400 mr-3"></i>
+                        <Factory className="w-5 h-5 text-gray-400 mr-3" />
                         <span className="font-medium text-gray-800">{brand}</span>
                       </div>
                     ))}

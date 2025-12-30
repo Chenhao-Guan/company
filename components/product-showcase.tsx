@@ -2,6 +2,17 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
+import { Droplet, Zap, Settings, Shield, Gauge, HardHat, ArrowRight, LucideIcon } from "lucide-react"
+
+// Map icon names to Lucide components
+const iconMap: Record<string, LucideIcon> = {
+  tint: Droplet,
+  bolt: Zap,
+  cog: Settings,
+  "shield-alt": Shield,
+  "gauge-high": Gauge,
+  "hard-hat": HardHat,
+}
 
 interface ProductShowcaseProps {
   onProductSelect: (product: any) => void
@@ -16,7 +27,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
       id: 1,
       title: "Hydraulic System Parts",
       description: "High-precision hydraulic pumps, valves, seals and other core components",
-      icon: "fas fa-tint",
+      icon: "tint",
       image: "/placeholder.svg?height=300&width=400",
       gradient: "from-blue-500 to-blue-600",
       details: {
@@ -33,7 +44,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
       id: 2,
       title: "Electrical Control Parts",
       description: "PLC modules, sensors, relays and other automation equipment",
-      icon: "fas fa-bolt",
+      icon: "bolt",
       image: "/placeholder.svg?height=300&width=400",
       gradient: "from-purple-500 to-purple-600",
       details: {
@@ -46,7 +57,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
       id: 3,
       title: "Mechanical Drive Parts",
       description: "Bearings, gears, couplings and other transmission system components",
-      icon: "fas fa-cog",
+      icon: "cog",
       image: "/placeholder.svg?height=300&width=400",
       gradient: "from-green-500 to-green-600",
       details: {
@@ -59,7 +70,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
       id: 4,
       title: "Sealing & Lubrication",
       description: "O-rings, oil seals, lubricants and other sealing products",
-      icon: "fas fa-shield-alt",
+      icon: "shield-alt",
       image: "/placeholder.svg?height=300&width=400",
       gradient: "from-orange-500 to-orange-600",
       details: {
@@ -72,7 +83,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
       id: 5,
       title: "Instrumentation",
       description: "Pressure gauges, thermometers, flow meters and other measuring equipment",
-      icon: "fas fa-gauge-high",
+      icon: "gauge-high",
       image: "/placeholder.svg?height=300&width=400",
       gradient: "from-red-500 to-red-600",
       details: {
@@ -85,7 +96,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
       id: 6,
       title: "Safety & Protection",
       description: "Safety valves, explosion-proof equipment, personal protective equipment",
-      icon: "fas fa-hard-hat",
+      icon: "hard-hat",
       image: "/placeholder.svg?height=300&width=400",
       gradient: "from-cyan-500 to-cyan-600",
       details: {
@@ -130,7 +141,10 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
                 />
                 <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`}></div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <i className={`${product.icon} text-6xl text-white`}></i>
+                  {(() => {
+                    const IconComponent = iconMap[product.icon] || Settings
+                    return <IconComponent className="w-24 h-24 text-white" />
+                  })()}
                 </div>
               </div>
 
@@ -142,7 +156,7 @@ export default function ProductShowcase({ onProductSelect }: ProductShowcaseProp
                   className="text-blue-600 font-semibold hover:text-blue-800 transition-colors flex items-center"
                   whileHover={{ x: 5 }}
                 >
-                  Learn More <i className="fas fa-arrow-right ml-2"></i>
+                  Learn More <ArrowRight className="w-4 h-4 ml-2" />
                 </motion.button>
               </div>
             </motion.div>
