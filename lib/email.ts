@@ -21,7 +21,7 @@ export async function sendEmail({ to, subject, html, text, cc }: EmailOptions) {
 
   try {
     // 创建邮件传输器
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number.parseInt(process.env.SMTP_PORT || "587"),
       secure: process.env.SMTP_SECURE === "true", // true for 465, false for other ports
@@ -45,7 +45,7 @@ export async function sendEmail({ to, subject, html, text, cc }: EmailOptions) {
     return { success: true, messageId: info.messageId }
   } catch (error) {
     console.error("❌ Email sending failed:", error)
-    return { success: false, error: error.message }
+    return { success: false, error: error instanceof Error ? error.message : "Unknown error" }
   }
 }
 

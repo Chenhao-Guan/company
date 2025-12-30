@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
+import { ArrowRight, Search } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ProductDetailModal from "@/components/product-detail-modal"
@@ -40,7 +41,7 @@ export default function ProductsPage() {
     const matchesSearch =
       product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.brands.some((brand) => brand.toLowerCase().includes(searchTerm.toLowerCase()))
+      product.brands.some((brand: string) => brand.toLowerCase().includes(searchTerm.toLowerCase()))
     return matchesCategory && matchesSearch
   })
 
@@ -164,7 +165,7 @@ export default function ProductsPage() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex flex-wrap gap-1">
-                      {product.brands.slice(0, 2).map((brand, idx) => (
+                      {product.brands.slice(0, 2).map((brand: string, idx: number) => (
                         <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">
                           {brand}
                         </span>
@@ -176,7 +177,7 @@ export default function ProductsPage() {
                       )}
                     </div>
                     <motion.div className="text-blue-600 font-semibold text-sm flex items-center" whileHover={{ x: 5 }}>
-                      View <i className="fas fa-arrow-right ml-1"></i>
+                      View <ArrowRight className="w-4 h-4 ml-1" />
                     </motion.div>
                   </div>
                 </div>
@@ -186,7 +187,7 @@ export default function ProductsPage() {
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-12">
-              <i className="fas fa-search text-4xl text-gray-400 mb-4"></i>
+              <Search className="w-16 h-16 text-gray-400 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No products found</h3>
               <p className="text-gray-500">Try adjusting your search or filter criteria</p>
             </div>

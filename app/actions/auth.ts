@@ -78,9 +78,8 @@ export async function login(formData: FormData) {
   }
 }
 
-export async function logout() {
+export async function logout(_formData?: FormData) {
   await clearSessionCookie()
-  return { success: true }
 }
 
 export async function getAuthUser() {

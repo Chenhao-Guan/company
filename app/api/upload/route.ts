@@ -90,7 +90,7 @@ export async function GET(request: Request) {
     const files = fs.readdirSync(uploadDir)
       .filter((file: string) => {
         const ext = file.split('.').pop()?.toLowerCase()
-        return ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)
+        return ext !== undefined && ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)
       })
       .map((file: string) => ({
         url: `/image/${folder}/${file}`,

@@ -67,7 +67,7 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
 
     // Split content into sections and insert images
     const contentSections = content.split("</p>")
-    const result = []
+    const result: React.ReactNode[] = []
     let imageIndex = 0
 
     contentSections.forEach((section, index) => {

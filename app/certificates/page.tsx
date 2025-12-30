@@ -2,13 +2,37 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
+import { Award, Shield, CheckCircle, LucideIcon, X, ArrowRight, Award as CertificateIcon, Leaf } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
+
+interface Certificate {
+  id: number
+  title: string
+  category: string
+  description: string
+  issuer: string
+  validUntil: string
+  status: string
+  image: string
+  details: {
+    scope: string
+    certificateNumber: string
+    firstIssued: string
+    lastAudit: string
+  }
+}
+
+interface Category {
+  id: string
+  name: string
+  icon: LucideIcon
+}
 
 export default function CertificatesPage() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [selectedCertificate, setSelectedCertificate] = useState(null)
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
 
   // Fix scroll position on page load
@@ -16,12 +40,12 @@ export default function CertificatesPage() {
     window.scrollTo(0, 0)
   }, [])
 
-  const categories = [
-    { id: "all", name: "All Certificates", icon: "fas fa-certificate" },
-    { id: "quality", name: "Quality Management", icon: "fas fa-award" },
-    { id: "environmental", name: "Environmental", icon: "fas fa-leaf" },
-    { id: "safety", name: "Safety & Health", icon: "fas fa-shield-alt" },
-    { id: "product", name: "Product Certification", icon: "fas fa-check-circle" },
+  const categories: Category[] = [
+    { id: "all", name: "All Certificates", icon: CertificateIcon },
+    { id: "quality", name: "Quality Management", icon: Award },
+    { id: "environmental", name: "Environmental", icon: Leaf },
+    { id: "safety", name: "Safety & Health", icon: Shield },
+    { id: "product", name: "Product Certification", icon: CheckCircle },
   ]
 
   const certificates = [
@@ -135,7 +159,7 @@ export default function CertificatesPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <i className={`${category.icon} mr-2`}></i>
+                <category.icon className="w-5 h-5 mr-2 inline" />
                 {category.name}
               </motion.button>
             ))}
@@ -213,7 +237,7 @@ export default function CertificatesPage() {
                     className="mt-4 text-blue-600 font-semibold text-sm flex items-center justify-center"
                     whileHover={{ x: 5 }}
                   >
-                    View Details <i className="fas fa-arrow-right ml-1"></i>
+                    View Details <ArrowRight className="w-4 h-4 ml-1" />
                   </motion.div>
                 </div>
               </motion.div>
@@ -256,7 +280,7 @@ export default function CertificatesPage() {
                 onClick={() => setSelectedCertificate(null)}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                <i className="fas fa-times text-xl text-gray-500"></i>
+                <X className="w-6 h-6 text-gray-500" />
               </button>
             </div>
 

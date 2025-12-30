@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
+import { ArrowRight, Newspaper } from "lucide-react"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import NewsDetailModal from "@/components/news-detail-modal"
@@ -155,7 +156,7 @@ export default function NewsPage() {
 
                   {item.tags && (
                     <div className="flex flex-wrap gap-1 mb-4">
-                      {item.tags.slice(0, 3).map((tag, idx) => (
+                      {item.tags.slice(0, 3).map((tag: string, idx: number) => (
                         <span key={idx} className="px-2 py-1 bg-blue-100 text-blue-600 text-xs rounded">
                           {tag}
                         </span>
@@ -164,7 +165,7 @@ export default function NewsPage() {
                   )}
 
                   <motion.div className="flex items-center text-blue-600 font-semibold" whileHover={{ x: 5 }}>
-                    Read More <i className="fas fa-arrow-right ml-2"></i>
+                    Read More <ArrowRight className="w-4 h-4 ml-2" />
                   </motion.div>
                 </div>
               </motion.article>
@@ -173,7 +174,7 @@ export default function NewsPage() {
 
           {filteredNews.length === 0 && (
             <div className="text-center py-12">
-              <i className="fas fa-newspaper text-4xl text-gray-400 mb-4"></i>
+              <Newspaper className="w-16 h-16 text-gray-400 mb-4 mx-auto" />
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No news found</h3>
               <p className="text-gray-500">Try selecting a different category</p>
             </div>
