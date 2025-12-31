@@ -73,9 +73,8 @@ export const metadata: Metadata = {
     // yandex: 'your-yandex-verification-code',
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/logo.png',
+    apple: '/logo.png',
   },
   manifest: '/site.webmanifest',
 }
