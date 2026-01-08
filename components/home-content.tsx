@@ -30,6 +30,14 @@ const ContactSection = dynamic(() => import("@/components/contact-section"), {
   ),
 })
 
+const VideoSection = dynamic(() => import("@/components/video-section"), {
+  loading: () => (
+    <div className="py-20 flex justify-center">
+      <div className="animate-pulse text-gray-400">Loading...</div>
+    </div>
+  ),
+})
+
 export default function HomeContent() {
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8])
@@ -44,6 +52,9 @@ export default function HomeContent() {
       </Suspense>
       <Suspense fallback={<div className="py-20 flex justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
         <AboutSection />
+      </Suspense>
+      <Suspense fallback={<div className="py-20 flex justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
+        <VideoSection />
       </Suspense>
       <Suspense fallback={<div className="py-20 flex justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
         <ContactSection />
