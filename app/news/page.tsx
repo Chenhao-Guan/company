@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
-import { ArrowRight, Newspaper } from "lucide-react"
+import { ArrowRight, Newspaper, Star, Calendar, User, type LucideIcon } from "lucide-react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Header from "@/components/header"
@@ -14,6 +14,16 @@ const NewsDetailModal = dynamic(() => import("@/components/news-detail-modal"), 
   ssr: false,
   loading: () => <div className="flex items-center justify-center p-8">Loading...</div>,
 })
+
+// Map category IDs to lucide-react icons
+const categoryIconMap: Record<string, LucideIcon> = {
+  "all": Newspaper,
+  "company": Newspaper, // or Building
+  "products": Newspaper, // or Box
+  "technology": Newspaper, // or Cpu
+  "industry": Newspaper, // or Factory
+  "announcements": Newspaper, // or Megaphone
+}
 
 export default function NewsPage() {
   const ref = useRef(null)
@@ -75,22 +85,25 @@ export default function NewsPage() {
       <section className="py-8 bg-gray-50 border-b" ref={ref}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-3">
-            {newsCategories.map((category) => (
-              <motion.button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                  selectedCategory === category.id
-                    ? "bg-blue-600 text-white shadow-lg"
-                    : "bg-white text-gray-700 hover:bg-blue-50 border border-gray-200"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <i className={`${category.icon} mr-2`}></i>
-                {category.name}
-              </motion.button>
-            ))}
+            {newsCategories.map((category) => {
+              const IconComponent = categoryIconMap[category.id] || Newspaper
+              return (
+                <motion.button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-6 py-3 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                    selectedCategory === category.id
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "bg-white text-gray-700 hover:bg-blue-50 border border-gray-200"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  {category.name}
+                </motion.button>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -154,8 +167,8 @@ export default function NewsPage() {
                   </div>
                   {item.featured && (
                     <div className="absolute top-4 right-4">
-                      <span className="px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded">
-                        <i className="fas fa-star mr-1"></i>Featured
+                      <span className="px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded flex items-center">
+                        <Star className="w-3 h-3 mr-1 fill-current" />Featured
                       </span>
                     </div>
                   )}
@@ -163,10 +176,10 @@ export default function NewsPage() {
 
                 <div className="p-6">
                   <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <i className="fas fa-calendar-alt mr-2"></i>
+                    <Calendar className="w-4 h-4 mr-2" />
                     {item.date}
                     <span className="mx-2">•</span>
-                    <i className="fas fa-user mr-2"></i>
+                    <User className="w-4 h-4 mr-2" />
                     {item.author}
                   </div>
 
