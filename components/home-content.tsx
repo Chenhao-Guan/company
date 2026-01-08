@@ -1,8 +1,8 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import dynamic from "next/dynamic"
-import { Suspense } from "react"
+import { Suspense, memo } from "react"
 import HeroBanner from "@/components/hero-banner"
 
 // Lazy load components below the fold
@@ -38,15 +38,10 @@ const VideoSection = dynamic(() => import("@/components/video-section"), {
   ),
 })
 
-export default function HomeContent() {
-  const { scrollYProgress } = useScroll()
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8])
-
+function HomeContent() {
   return (
     <main id="main-content" tabIndex={-1}>
-      <motion.div style={{ opacity }}>
-        <HeroBanner />
-      </motion.div>
+      <HeroBanner />
       <Suspense fallback={<div className="py-20 flex justify-center"><div className="animate-pulse text-gray-400">Loading...</div></div>}>
         <ProductOverview />
       </Suspense>
@@ -62,3 +57,5 @@ export default function HomeContent() {
     </main>
   )
 }
+
+export default memo(HomeContent)

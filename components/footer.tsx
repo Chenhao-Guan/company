@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Settings, Mail, Phone, MapPin, Clock, QrCode } from "lucide-react"
+import { memo } from "react"
 
 // SVG icons for WeChat and QQ (not available in Lucide)
 const WeChatIcon = ({ className }: { className?: string }) => (
@@ -28,7 +29,7 @@ const QQIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-export default function Footer() {
+function Footer() {
   const quickLinks = [
     { name: "Home", href: "#home" },
     { name: "About Us", href: "#about" },
@@ -210,3 +211,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default memo(Footer)

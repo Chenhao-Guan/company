@@ -1,12 +1,18 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, memo, useEffect, useState } from "react"
 import { Calendar, Package, Handshake, Star, Settings, Check } from "lucide-react"
+import { prefersReducedMotion } from "@/lib/performance"
 
-export default function AboutSection() {
+function AboutSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const [reduceMotion, setReduceMotion] = useState(true)
+
+  useEffect(() => {
+    setReduceMotion(prefersReducedMotion())
+  }, [])
 
   const stats = [
     { number: "15+", label: "Years Experience", icon: Calendar },
@@ -76,19 +82,19 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Floating Elements */}
+            {/* Floating Elements - only animate if user doesn't prefer reduced motion */}
             <motion.div
               className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+              animate={!reduceMotion ? { rotate: 360 } : undefined}
+              transition={!reduceMotion ? { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" } : undefined}
             >
               <Settings className="w-10 h-10 text-white" />
             </motion.div>
 
             <motion.div
               className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+              animate={!reduceMotion ? { y: [0, -10, 0] } : undefined}
+              transition={!reduceMotion ? { duration: 3, repeat: Number.POSITIVE_INFINITY } : undefined}
             >
               <Check className="w-8 h-8 text-white" />
             </motion.div>
@@ -98,3 +104,5 @@ export default function AboutSection() {
     </section>
   )
 }
+
+export default memo(AboutSection)

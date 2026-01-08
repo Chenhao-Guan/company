@@ -1,22 +1,29 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, memo } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image" 
+import Image from "next/image"
 import { useRouter, usePathname } from "next/navigation"
+import { throttle } from "@/lib/performance"
 
-export default function Header() {
+function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
 
-  useEffect(() => {
-    const handleScroll = () => {
+  // Memoize scroll handler with throttling for performance
+  const handleScroll = useCallback(
+    throttle(() => {
       setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
+    }, 100), // Update at most once every 100ms
+    []
+  )
+
+  useEffect(() => {
+    // Use passive event listener for better scroll performance
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [handleScroll])
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -121,3 +128,6 @@ export default function Header() {
     </motion.header>
   )
 }
+
+// Memoize component to prevent unnecessary re-renders
+export default memo(Header)

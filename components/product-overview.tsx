@@ -1,11 +1,11 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, memo } from "react"
 import { useRouter } from "next/navigation"
 import { Layers, Copy, Disc, Circle, CircleDot, Settings, Link2, ArrowRight } from "lucide-react"
 
-export default function ProductOverview() {
+function ProductOverview() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const router = useRouter()
@@ -128,3 +128,5 @@ const productCategories = [
     </section>
   )
 }
+
+export default memo(ProductOverview)

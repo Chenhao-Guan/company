@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, memo } from "react"
 import { Play, Pause } from "lucide-react"
 
 interface Video {
@@ -35,7 +35,7 @@ const videos: Video[] = [
   }
 ]
 
-export default function VideoSection() {
+function VideoSection() {
   const [playingStates, setPlayingStates] = useState<Record<number, boolean>>({})
 
   const togglePlay = (videoId: number, videoElement: HTMLVideoElement) => {
@@ -96,3 +96,5 @@ export default function VideoSection() {
     </section>
   )
 }
+
+export default memo(VideoSection)

@@ -1,13 +1,15 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, memo } from "react"
 import { Info, Phone } from "lucide-react"
+import { prefersReducedMotion } from "@/lib/performance"
 
-export default function HeroBanner() {
+function HeroBanner() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
   const [isMounted, setIsMounted] = useState(false)
+  const reduceMotion = prefersReducedMotion()
 
   useEffect(() => {
     setIsMounted(true)
@@ -18,13 +20,16 @@ export default function HeroBanner() {
       {/* Background with gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"></div>
 
-      {/* Animated background elements */}
-      {isMounted && (
+      {/* Animated background elements - optimized for performance */}
+      {isMounted && !reduceMotion && (
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(8)].map((_, i) => ( // Reduced from 20 to 8 particles
             <motion.div
               key={i}
               className="absolute w-2 h-2 bg-blue-400/20 rounded-full"
+              style={{
+                willChange: 'transform, opacity', // Hint to browser for optimization
+              }}
               initial={{
                 x: Math.random() * (typeof window !== "undefined" ? window.innerWidth : 1000),
                 y: Math.random() * (typeof window !== "undefined" ? window.innerHeight : 1000),
@@ -35,9 +40,10 @@ export default function HeroBanner() {
                 opacity: [0, 1, 0],
               }}
               transition={{
-                duration: 3 + Math.random() * 2,
+                duration: 4 + Math.random() * 2, // Slower animations
                 repeat: Number.POSITIVE_INFINITY,
                 delay: Math.random() * 2,
+                ease: "easeInOut"
               }}
             />
           ))}
@@ -163,3 +169,5 @@ export default function HeroBanner() {
     </section>
   )
 }
+
+export default memo(HeroBanner)

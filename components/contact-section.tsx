@@ -1,10 +1,10 @@
 "use client"
 
 import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, memo } from "react"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 
-export default function ContactSection() {
+function ContactSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -120,3 +120,5 @@ export default function ContactSection() {
     </section>
   )
 }
+
+export default memo(ContactSection)
