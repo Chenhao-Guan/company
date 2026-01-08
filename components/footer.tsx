@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Settings, Mail, Phone, MapPin, Clock, QrCode } from "lucide-react"
+import { Settings, Mail, Phone, MapPin, Clock } from "lucide-react"
 import { memo } from "react"
 
 // SVG icons for WeChat and QQ (not available in Lucide)
@@ -174,14 +174,6 @@ function Footer() {
                 <Clock className="text-blue-500 w-5 h-5" />
                 <p className="text-gray-400">Monday to Friday 8:00-18:00</p>
               </div>
-            </div>
-
-            {/* QR Code */}
-            <div className="mt-6 p-4 bg-gray-800 rounded-lg text-center">
-              <div className="w-20 h-20 bg-white rounded-lg mx-auto mb-2 flex items-center justify-center">
-                <QrCode className="text-gray-800 w-10 h-10" />
-              </div>
-              <p className="text-sm text-gray-400">Scan to Follow Us</p>
             </div>
           </motion.div>
         </div>
