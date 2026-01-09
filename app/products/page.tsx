@@ -30,6 +30,13 @@ export default function ProductsPage() {
   // Fix scroll position on page load
   useEffect(() => {
     window.scrollTo(0, 0)
+
+    // Read category from URL params on mount
+    const params = new URLSearchParams(window.location.search)
+    const categoryParam = params.get("category")
+    if (categoryParam && productCategories.some(cat => cat.id === categoryParam)) {
+      setSelectedCategory(categoryParam)
+    }
   }, [])
 
   // Reset to page 1 when category or search changes

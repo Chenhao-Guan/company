@@ -3,37 +3,49 @@
 import { motion } from "framer-motion"
 import { Settings, Mail, Phone, MapPin, Clock } from "lucide-react"
 import { memo } from "react"
+import { useRouter } from "next/navigation"
 import { WeChatIcon, QQIcon } from "./icons/social"
+import { productCategories as productCategoriesData } from "@/data/products"
 
 function Footer() {
+  const router = useRouter()
+
   const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About Us", href: "#about" },
-    { name: "Products", href: "#products" },
-    { name: "News", href: "#news" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/#about" },
+    { name: "Products", href: "/products" },
+    { name: "News", href: "/news" },
+    { name: "Contact", href: "/#contact" },
   ]
 
-  const productCategories = [
-    "cylinder-cover",
-    "piston",
-    "cylinder-liner",
-    "bearing",
-    "crankshaft",
-    "connecting-rod",
-  ]
+  const productCategories = productCategoriesData.filter(cat => cat.id !== "all")
 
   const socialLinks = [
-    { icon: WeChatIcon, name: "WeChat", href: "#contact" },
-    { icon: QQIcon, name: "QQ", href: "#contact" },
-    { icon: Mail, name: "Email", href: "#contact" },
-    { icon: Phone, name: "Phone", href: "#contact" },
+    { icon: WeChatIcon, name: "WeChat", href: "/#contact" },
+    { icon: QQIcon, name: "QQ", href: "/#contact" },
+    { icon: Mail, name: "Email", href: "/#contact" },
+    { icon: Phone, name: "Phone", href: "/#contact" },
   ]
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+  const navigateTo = (href: string) => {
+    if (href.startsWith("/#")) {
+      // Handle anchor links on home page
+      router.push("/")
+      setTimeout(() => {
+        const element = document.querySelector(href.substring(1))
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      }, 100)
+    } else if (href.startsWith("#")) {
+      // Handle anchor links on current page
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+      }
+    } else {
+      // Handle regular page navigation
+      router.push(href)
     }
   }
 
@@ -65,7 +77,7 @@ function Footer() {
               {socialLinks.map((social) => (
                 <motion.button
                   key={social.name}
-                  onClick={() => scrollToSection(social.href)}
+                  onClick={() => navigateTo(social.href)}
                   aria-label={social.name} // Good for accessibility
                   className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
                   whileHover={{ scale: 1.1, y: -2 }}
@@ -89,7 +101,7 @@ function Footer() {
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <motion.button
-                    onClick={() => scrollToSection(link.href)}
+                    onClick={() => navigateTo(link.href)}
                     className="text-gray-400 hover:text-white transition-colors text-left"
                     whileHover={{ x: 5 }}
                   >
@@ -110,10 +122,14 @@ function Footer() {
             <h4 className="text-lg font-semibold mb-6">Product Categories</h4>
             <ul className="space-y-3">
               {productCategories.map((category) => (
-                <li key={category}>
-                  <motion.a href="#" className="text-gray-400 hover:text-white transition-colors" whileHover={{ x: 5 }}>
-                    {category}
-                  </motion.a>
+                <li key={category.id}>
+                  <motion.button
+                    onClick={() => navigateTo(`/products?category=${category.id}`)}
+                    className="text-gray-400 hover:text-white transition-colors text-left"
+                    whileHover={{ x: 5 }}
+                  >
+                    {category.name}
+                  </motion.button>
                 </li>
               ))}
             </ul>
