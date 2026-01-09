@@ -8,28 +8,19 @@ import Image from "next/image"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { NewsGridSkeleton } from "@/components/news-skeleton"
-import { newsCategories } from "@/data/news"
+import { newsCategories, type NewsItem } from "@/data/news"
+import { NEWS_CATEGORY_ICON_MAP } from "@/lib/constants"
 
 const NewsDetailModal = dynamic(() => import("@/components/news-detail-modal"), {
   ssr: false,
   loading: () => <div className="flex items-center justify-center p-8">Loading...</div>,
 })
 
-// Map category IDs to lucide-react icons
-const categoryIconMap: Record<string, LucideIcon> = {
-  "all": Newspaper,
-  "company": Newspaper, // or Building
-  "products": Newspaper, // or Box
-  "technology": Newspaper, // or Cpu
-  "industry": Newspaper, // or Factory
-  "announcements": Newspaper, // or Megaphone
-}
-
 export default function NewsPage() {
   const ref = useRef(null)
-  const [selectedNews, setSelectedNews] = useState(null)
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null)
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [news, setNews] = useState<any[]>([])
+  const [news, setNews] = useState<NewsItem[]>([])
   const [loading, setLoading] = useState(true)
 
   // Fix scroll position on page load
@@ -86,7 +77,7 @@ export default function NewsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-3">
             {newsCategories.map((category) => {
-              const IconComponent = categoryIconMap[category.id] || Newspaper
+              const IconComponent: LucideIcon = NEWS_CATEGORY_ICON_MAP[category.id] || Newspaper
               return (
                 <motion.button
                   key={category.id}

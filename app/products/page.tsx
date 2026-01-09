@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
-import { ArrowRight, Search, ChevronLeft, ChevronRight, Layers, Copy, Disc, Circle, CircleDot, Settings, Link2, type LucideIcon } from "lucide-react"
+import { ArrowRight, Search, ChevronLeft, ChevronRight, Layers, type LucideIcon } from "lucide-react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Header from "@/components/header"
@@ -10,22 +10,12 @@ import Footer from "@/components/footer"
 import { ProductGridSkeleton } from "@/components/product-skeleton"
 import { productCategories, type Product } from "@/data/products"
 import { generateCollectionPageJsonLd, generateBreadcrumbJsonLd, generateProductJsonLd } from "@/lib/structured-data"
+import { PRODUCT_CATEGORY_ICON_MAP, PAGINATION } from "@/lib/constants"
 
 const ProductDetailModal = dynamic(() => import("@/components/product-detail-modal"), {
   ssr: false,
   loading: () => <div className="flex items-center justify-center p-8">Loading...</div>,
 })
-
-// Map category IDs to lucide-react icons
-const categoryIconMap: Record<string, LucideIcon> = {
-  "all": Layers,
-  "cylinder-cover": Copy,
-  "piston": Disc,
-  "cylinder-liner": Circle,
-  "bearing": CircleDot,
-  "crankshaft": Settings,
-  "connecting-rod": Link2,
-}
 
 export default function ProductsPage() {
   const ref = useRef(null)
@@ -35,7 +25,7 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 12
+  const itemsPerPage = PAGINATION.ITEMS_PER_PAGE
 
   // Fix scroll position on page load
   useEffect(() => {
@@ -127,7 +117,7 @@ export default function ProductsPage() {
   // Scroll to top of products section when page changes
   useEffect(() => {
     if (currentPage > 1) {
-      window.scrollTo({ top: 400, behavior: 'smooth' })
+      window.scrollTo({ top: PAGINATION.SCROLL_OFFSET, behavior: 'smooth' })
     }
   }, [currentPage])
 
@@ -181,7 +171,7 @@ export default function ProductsPage() {
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by product category">
               {productCategories.map((category) => {
-                const IconComponent = categoryIconMap[category.id] || Layers
+                const IconComponent: LucideIcon = PRODUCT_CATEGORY_ICON_MAP[category.id] || Layers
                 return (
                   <motion.button
                     key={category.id}

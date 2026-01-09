@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import dynamic from "next/dynamic"
 import { Suspense, memo } from "react"
 import HeroBanner from "@/components/hero-banner"

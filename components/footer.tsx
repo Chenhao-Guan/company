@@ -3,31 +3,7 @@
 import { motion } from "framer-motion"
 import { Settings, Mail, Phone, MapPin, Clock } from "lucide-react"
 import { memo } from "react"
-
-// SVG icons for WeChat and QQ (not available in Lucide)
-const WeChatIcon = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M8.5 13.5A1.5 1.5 0 1 1 7 12a1.5 1.5 0 0 1 1.5 1.5zm7 0A1.5 1.5 0 1 1 14 12a1.5 1.5 0 0 1 1.5 1.5zM12 2C6.5 2 2 6 2 11c0 2.5 1 4.8 2.7 6.5L3 22l5-1.5c2 1.2 4 1.5 6 1.5 5.5 0 10-4 10-9S17.5 2 12 2z" />
-  </svg>
-)
-
-const QQIcon = ({ className }: { className?: string }) => (
-  <svg
-    className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M12 2C6.5 2 2 6 2 11c0 2.5 1 4.8 2.7 6.5L3 22l5-1.5c2 1.2 4 1.5 6 1.5 5.5 0 10-4 10-9S17.5 2 12 2z" />
-    <circle cx="8.5" cy="10.5" r="1.5" />
-    <circle cx="15.5" cy="10.5" r="1.5" />
-  </svg>
-)
+import { WeChatIcon, QQIcon } from "./icons/social"
 
 function Footer() {
   const quickLinks = [

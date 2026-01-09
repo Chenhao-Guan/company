@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, memo } from "react"
-import { Play, Pause } from "lucide-react"
 
 interface Video {
   id: number
@@ -36,17 +35,7 @@ const videos: Video[] = [
 ]
 
 function VideoSection() {
-  const [playingStates, setPlayingStates] = useState<Record<number, boolean>>({})
-
-  const togglePlay = (videoId: number, videoElement: HTMLVideoElement) => {
-    if (videoElement.paused) {
-      videoElement.play()
-      setPlayingStates(prev => ({ ...prev, [videoId]: true }))
-    } else {
-      videoElement.pause()
-      setPlayingStates(prev => ({ ...prev, [videoId]: false }))
-    }
-  }
+  const [_playingStates, setPlayingStates] = useState<Record<number, boolean>>({})
 
   return (
     <section className="py-16 bg-gray-50">

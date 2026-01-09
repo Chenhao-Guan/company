@@ -6,6 +6,35 @@ import { eq, desc } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { transformDbProduct, getFormDataArray, getDbResult } from '@/lib/utils'
 
+// Helper function to extract product data from FormData
+function extractProductData(formData: FormData) {
+  return {
+    specifications: getFormDataArray(formData, 'specifications[]'),
+    applications: getFormDataArray(formData, 'applications[]'),
+    brands: getFormDataArray(formData, 'brands[]'),
+    gallery: getFormDataArray(formData, 'gallery[]'),
+  }
+}
+
+// Helper function to build product object
+function buildProductObject(formData: FormData, extractedData: ReturnType<typeof extractProductData>) {
+  return {
+    title: formData.get('title') as string,
+    category: formData.get('category') as string,
+    description: formData.get('description') as string,
+    icon: (formData.get('icon') as string) || '',
+    image: formData.get('image') as string,
+    gradient: (formData.get('gradient') as string) || 'from-transparent to-transparent',
+    detailedDescription: formData.get('detailedDescription') as string || null,
+    technicalSpecs: formData.get('technicalSpecs') as string || null,
+    specifications: extractedData.specifications,
+    applications: extractedData.applications,
+    brands: extractedData.brands,
+    gallery: extractedData.gallery.length > 0 ? extractedData.gallery : null,
+    published: formData.get('published') === 'true',
+  }
+}
+
 // Get all products (public)
 export async function getPublicProducts(filter?: { category?: string }) {
   const query = db
@@ -62,33 +91,15 @@ export async function getProductById(id: number) {
 // Create product
 export async function createProduct(formData: FormData) {
   try {
-    const specifications = getFormDataArray(formData, 'specifications[]')
-    const applications = getFormDataArray(formData, 'applications[]')
-    const brands = getFormDataArray(formData, 'brands[]')
-    const gallery = getFormDataArray(formData, 'gallery[]')
-
-    const data = {
-      title: formData.get('title') as string,
-      category: formData.get('category') as string,
-      description: formData.get('description') as string,
-      icon: (formData.get('icon') as string) || '',
-      image: formData.get('image') as string,
-      gradient: (formData.get('gradient') as string) || 'from-transparent to-transparent',
-      detailedDescription: formData.get('detailedDescription') as string || null,
-      technicalSpecs: formData.get('technicalSpecs') as string || null,
-      specifications,
-      applications,
-      brands,
-      gallery: gallery.length > 0 ? gallery : null,
-      published: formData.get('published') === 'true',
-    }
+    const extractedData = extractProductData(formData)
+    const data = buildProductObject(formData, extractedData)
 
     await db.insert(products).values({
       ...data,
-      specifications: JSON.stringify(specifications),
-      applications: JSON.stringify(applications),
-      brands: JSON.stringify(brands),
-      gallery: gallery.length > 0 ? JSON.stringify(gallery) : null,
+      specifications: JSON.stringify(extractedData.specifications),
+      applications: JSON.stringify(extractedData.applications),
+      brands: JSON.stringify(extractedData.brands),
+      gallery: extractedData.gallery.length > 0 ? JSON.stringify(extractedData.gallery) : null,
     })
 
     revalidatePath('/products')
@@ -104,35 +115,17 @@ export async function createProduct(formData: FormData) {
 // Update product
 export async function updateProduct(id: number, formData: FormData) {
   try {
-    const specifications = getFormDataArray(formData, 'specifications[]')
-    const applications = getFormDataArray(formData, 'applications[]')
-    const brands = getFormDataArray(formData, 'brands[]')
-    const gallery = getFormDataArray(formData, 'gallery[]')
-
-    const data = {
-      title: formData.get('title') as string,
-      category: formData.get('category') as string,
-      description: formData.get('description') as string,
-      icon: (formData.get('icon') as string) || '',
-      image: formData.get('image') as string,
-      gradient: (formData.get('gradient') as string) || 'from-transparent to-transparent',
-      detailedDescription: formData.get('detailedDescription') as string || null,
-      technicalSpecs: formData.get('technicalSpecs') as string || null,
-      specifications,
-      applications,
-      brands,
-      gallery: gallery.length > 0 ? gallery : null,
-      published: formData.get('published') === 'true',
-    }
+    const extractedData = extractProductData(formData)
+    const data = buildProductObject(formData, extractedData)
 
     await db
       .update(products)
       .set({
         ...data,
-        specifications: JSON.stringify(specifications),
-        applications: JSON.stringify(applications),
-        brands: JSON.stringify(brands),
-        gallery: gallery.length > 0 ? JSON.stringify(gallery) : null,
+        specifications: JSON.stringify(extractedData.specifications),
+        applications: JSON.stringify(extractedData.applications),
+        brands: JSON.stringify(extractedData.brands),
+        gallery: extractedData.gallery.length > 0 ? JSON.stringify(extractedData.gallery) : null,
         updatedAt: Math.floor(Date.now() / 1000),
       })
       .where(eq(products.id, id))
