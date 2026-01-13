@@ -29,9 +29,12 @@ function ImageCarousel({ images }: { images: { src: string; alt: string; title: 
     const nextIndex = (currentIndex + 1) % images.length
     if (!loadedImages.has(nextIndex)) {
       const img = new Image()
-      img.src = images[nextIndex].src
-      img.onload = () => {
-        setLoadedImages(prev => new Set([...prev, nextIndex]))
+      const nextImage = images[nextIndex]
+      if (nextImage) {
+        img.src = nextImage.src
+        img.onload = () => {
+          setLoadedImages(prev => new Set([...prev, nextIndex]))
+        }
       }
     }
   }, [currentIndex, images, loadedImages])
@@ -45,6 +48,9 @@ function ImageCarousel({ images }: { images: { src: string; alt: string; title: 
 
     return () => clearInterval(interval)
   }, [isAutoPlaying, images.length])
+
+  // 获取当前图片，确保类型安全
+  const currentImage = images[currentIndex] ?? images[0] ?? { src: '', alt: '', title: '', description: '' }
 
   const goToPrevious = () => {
     setIsAutoPlaying(false)
@@ -72,8 +78,8 @@ function ImageCarousel({ images }: { images: { src: string; alt: string; title: 
         )}
         <motion.img
           key={currentIndex}
-          src={images[currentIndex].src}
-          alt={images[currentIndex].alt}
+          src={currentImage.src}
+          alt={currentImage.alt}
           initial={{ opacity: 0 }}
           animate={{ opacity: loadedImages.has(currentIndex) ? 1 : 0 }}
           transition={{ duration: 0.5 }}
@@ -93,8 +99,8 @@ function ImageCarousel({ images }: { images: { src: string; alt: string; title: 
             transition={{ duration: 0.5, delay: 0.2 }}
             className="absolute bottom-6 left-6 text-white"
           >
-            <h3 className="text-2xl font-bold mb-2">{images[currentIndex].title}</h3>
-            <p className="text-gray-200">{images[currentIndex].description}</p>
+            <h3 className="text-2xl font-bold mb-2">{currentImage.title}</h3>
+            <p className="text-gray-200">{currentImage.description}</p>
           </motion.div>
         )}
       </div>

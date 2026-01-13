@@ -30,6 +30,8 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
+  // Skip trailing slash redirection
+  skipTrailingSlashRedirect: true,
   // Headers for caching and security
   async headers() {
     return [
