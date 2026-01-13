@@ -7,6 +7,12 @@ import path from 'path'
 const dbDir = path.join(process.cwd(), 'database')
 const dbPath = process.env.DATABASE_PATH || path.join(dbDir, 'xiamen-union.db')
 
+// Create database directory if it doesn't exist
+import fs from 'fs'
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true })
+}
+
 // Create database connection
 const sqlite = new Database(dbPath)
 
