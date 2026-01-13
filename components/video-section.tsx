@@ -1,80 +1,59 @@
 "use client"
 
-import { useState, memo } from "react"
+import { memo } from "react"
 
-interface Video {
+interface YouTubeVideo {
   id: number
   title: string
   description: string
-  src: string
-  poster: string
+  videoId: string  // YouTube video ID (e.g., dQw4w9WgXcQ)
 }
 
-const videos: Video[] = [
+// 替换为你的YouTube视频ID
+const youTubeVideos: YouTubeVideo[] = [
   {
     id: 1,
-    title: "产品展示",
-    description: "了解我们的高质量工业备件产品",
-    src: "/video/video1.mp4",
-    poster: "/image/video1-poster.jpg"
-  },
-  {
-    id: 2,
-    title: "生产流程",
-    description: "严格的质量控制体系",
-    src: "/video/video2.mp4",
-    poster: "/image/video2-poster.jpg"
-  },
-  {
-    id: 3,
-    title: "公司介绍",
-    description: "厦门联合备件有限公司",
-    src: "/video/video3.mp4",
-    poster: "/image/video3-poster.jpg"
+    title: "厦门联合备件有限公司",
+    description: "Xiamen Union Spares Ltd. - 专业工业设备备件供应商",
+    videoId: "bEvZFN-FID8"  // 你的YouTube视频ID
   }
 ]
 
 function VideoSection() {
-  const [_playingStates, setPlayingStates] = useState<Record<number, boolean>>({})
-
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            视频展示
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Video Introduction
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            通过视频了解我们的产品和服务
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Learn about our products and services through video
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {videos.map((video) => (
+        <div className="flex justify-center items-center max-w-5xl mx-auto">
+          {youTubeVideos.map((video) => (
             <div
               key={video.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+              className="w-full bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow"
             >
               <div className="relative aspect-video bg-black">
-                <video
-                  id={`video-${video.id}`}
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.videoId}?rel=0&modestbranding=1`}
+                  title={video.title}
                   className="w-full h-full"
-                  poster={video.poster}
-                  preload="none"
-                  controls
-                  onPlay={() => setPlayingStates(prev => ({ ...prev, [video.id]: true }))}
-                  onPause={() => setPlayingStates(prev => ({ ...prev, [video.id]: false }))}
-                >
-                  <source src={video.src} type="video/mp4" />
-                  您的浏览器不支持视频播放
-                </video>
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                />
               </div>
 
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <div className="p-8">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3 text-center">
                   {video.title}
                 </h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-lg text-gray-600 text-center">
                   {video.description}
                 </p>
               </div>
