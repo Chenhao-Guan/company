@@ -4,10 +4,10 @@ import { motion } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { ArrowRight, Search, ChevronLeft, ChevronRight, Layers, type LucideIcon } from "lucide-react"
 import dynamic from "next/dynamic"
-import Image from "next/image"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { ProductGridSkeleton } from "@/components/product-skeleton"
+import { ProductImage } from "@/components/product-image"
 import { productCategories, type Product } from "@/data/products"
 import { generateCollectionPageJsonLd, generateBreadcrumbJsonLd, generateProductJsonLd } from "@/lib/structured-data"
 import { PRODUCT_CATEGORY_ICON_MAP, PAGINATION } from "@/lib/constants"
@@ -128,6 +128,17 @@ export default function ProductsPage() {
     }
   }, [currentPage])
 
+  // Preload images for current page
+  useEffect(() => {
+    if (currentProducts.length > 0) {
+      // Preload current page images
+      currentProducts.forEach((product) => {
+        const img = document.createElement('img')
+        img.src = product.image
+      })
+    }
+  }, [currentProducts])
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -247,19 +258,11 @@ export default function ProductsPage() {
                 }}
               >
                 <div className="relative overflow-hidden">
-                  <Image
-                    src={product.image || "/placeholder.svg"}
-                    alt={product.title}
-                    width={400}
-                    height={192}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                  <ProductImage
+                    product={product}
                     priority={index < 8}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`}></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {product.icon && <i className={`${product.icon} text-5xl text-white`}></i>}
-                  </div>
                 </div>
 
                 <div className="p-6">

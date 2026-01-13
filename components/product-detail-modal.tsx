@@ -2,7 +2,7 @@
 
 import type { Product } from "@/data/products"
 import { Check, Factory } from "lucide-react"
-import Image from "next/image"
+import { ProductDetailImage } from "@/components/product-detail-image"
 import BaseModal from "./base-modal"
 
 interface ProductDetailModalProps {
@@ -37,17 +37,17 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
           <div className="space-y-4">
             {/* Main Image */}
             <div className="aspect-square rounded-2xl overflow-hidden relative">
-              <Image
+              <ProductDetailImage
                 src={product.image || "/placeholder.svg"}
                 alt={product.title}
                 width={800}
                 height={800}
-                className="w-full h-full object-cover"
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                className="w-full h-full object-cover"
               />
               <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-80`} />
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <span className={`${product.icon} text-8xl text-white`} />
               </div>
             </div>
@@ -57,13 +57,13 @@ export default function ProductDetailModal({ product, onClose }: ProductDetailMo
               <div className="grid grid-cols-3 gap-2">
                 {product.gallery.map((image, index) => (
                   <div key={index} className="aspect-square rounded-lg overflow-hidden">
-                    <Image
+                    <ProductDetailImage
                       src={image || "/placeholder.svg"}
                       alt={`${product.title} - Additional view ${index + 1}`}
                       width={400}
                       height={400}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                       sizes="(max-width: 1024px) 33vw, 200px"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 cursor-pointer"
                     />
                   </div>
                 ))}
