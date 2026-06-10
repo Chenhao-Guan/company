@@ -1,10 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Settings, Mail, Phone, MapPin, Clock } from "lucide-react"
+import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { memo } from "react"
 import { useRouter } from "next/navigation"
-import { WeChatIcon, QQIcon } from "./icons/social"
 import { productCategories as productCategoriesData } from "@/data/products"
 
 function Footer() {
@@ -20,177 +18,119 @@ function Footer() {
 
   const productCategories = productCategoriesData.filter(cat => cat.id !== "all")
 
-  const socialLinks = [
-    { icon: WeChatIcon, name: "WeChat", href: "/#contact" },
-    { icon: QQIcon, name: "QQ", href: "/#contact" },
-    { icon: Mail, name: "Email", href: "/#contact" },
-    { icon: Phone, name: "Phone", href: "/#contact" },
-  ]
-
   const navigateTo = (href: string) => {
     if (href.startsWith("/#")) {
-      // Handle anchor links on home page
       router.push("/")
       setTimeout(() => {
         const element = document.querySelector(href.substring(1))
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" })
-        }
+        if (element) element.scrollIntoView({ behavior: "smooth" })
       }, 100)
     } else if (href.startsWith("#")) {
-      // Handle anchor links on current page
       const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
-      }
+      if (element) element.scrollIntoView({ behavior: "smooth" })
     } else {
-      // Handle regular page navigation
       router.push(href)
     }
   }
 
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                <Settings className="text-white w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">Xiamen Union Spares</h3>
-                <p className="text-sm text-gray-400">Industrial Parts Solutions</p>
-              </div>
-            </div>
-            <p className="text-gray-400 mb-6">
-              Professional industrial equipment spare parts supplier, providing high-quality products and professional
-              services to global customers.
-            </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => (
-                <motion.button
-                  key={social.name}
-                  onClick={() => navigateTo(social.href)}
-                  aria-label={social.name} // Good for accessibility
-                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
+    <footer className="bg-[hsl(var(--foreground))] text-white">
+      {/* Top technical line */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[hsl(var(--primary))] to-transparent" />
 
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+          {/* Company Info - 4 cols */}
+          <div className="lg:col-span-4">
+            <div className="flex items-baseline gap-3 mb-6">
+              <span className="text-lg font-bold tracking-wider">RENHE</span>
+              <span className="text-xs tracking-widest text-gray-500">PRECISION SPARE PARTS</span>
+            </div>
+            <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+              Professional industrial equipment spare parts supplier.
+              Precision-engineered components for marine and locomotive diesel engines,
+              manufactured to micron tolerances.
+            </p>
+            <div className="flex gap-4">
+              <div className="px-3 py-1.5 border border-gray-700 text-xs spec-label tracking-wider text-gray-500">
+                ISO 9001
+              </div>
+              <div className="px-3 py-1.5 border border-gray-700 text-xs spec-label tracking-wider text-gray-500">
+                SINCE 2008
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Links - 2 cols */}
+          <div className="lg:col-span-2">
+            <div className="spec-label text-gray-500 mb-4 tracking-wider">NAVIGATION</div>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <motion.button
+                  <button
                     onClick={() => navigateTo(link.href)}
-                    className="text-gray-400 hover:text-white transition-colors text-left"
-                    whileHover={{ x: 5 }}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     {link.name}
-                  </motion.button>
+                  </button>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Product Categories */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h4 className="text-lg font-semibold mb-6">Product Categories</h4>
+          {/* Product Categories - 3 cols */}
+          <div className="lg:col-span-3">
+            <div className="spec-label text-gray-500 mb-4 tracking-wider">PRODUCT CATEGORIES</div>
             <ul className="space-y-3">
               {productCategories.map((category) => (
                 <li key={category.id}>
-                  <motion.button
+                  <button
                     onClick={() => navigateTo(`/products?category=${category.id}`)}
-                    className="text-gray-400 hover:text-white transition-colors text-left"
-                    whileHover={{ x: 5 }}
+                    className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     {category.name}
-                  </motion.button>
+                  </button>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            <h4 className="text-lg font-semibold mb-6">Contact Information</h4>
+          {/* Contact Info - 3 cols */}
+          <div className="lg:col-span-3">
+            <div className="spec-label text-gray-500 mb-4 tracking-wider">CONTACT</div>
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <MapPin className="text-blue-500 w-5 h-5 mt-0.5" />
-                <div>
-                  <p className="text-gray-400">
-                    Software Park Phase II, Siming District
-                    <br />
-                    Xiamen, Fujian, China
-                  </p>
-                </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-gray-600 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-gray-400">
+                  Software Park Phase II, Siming District<br />
+                  Xiamen, Fujian, China
+                </p>
               </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="text-blue-500 w-5 h-5" />
-                <p className="text-gray-400">+86 592-1234567</p>
+              <div className="flex items-center gap-3">
+                <Phone className="w-4 h-4 text-gray-600 flex-shrink-0" />
+                <p className="text-sm text-gray-400">+86 592-1234567</p>
               </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="text-blue-500 w-5 h-5" />
-                <p className="text-gray-400">info@xiamenunion.com</p>
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4 text-gray-600 flex-shrink-0" />
+                <p className="text-sm text-gray-400">info@xiamenunion.com</p>
               </div>
-              <div className="flex items-center space-x-3">
-                <Clock className="text-blue-500 w-5 h-5" />
-                <p className="text-gray-400">Monday to Friday 8:00-18:00</p>
+              <div className="flex items-center gap-3">
+                <Clock className="w-4 h-4 text-gray-600 flex-shrink-0" />
+                <p className="text-sm text-gray-400">Mon–Fri 08:00–18:00 CST</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom Bar */}
-        <motion.div
-          className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">© 2024 Xiamen Union Spares Ltd. All rights reserved.</p>
-          <div className="flex space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Site Map
-            </a>
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-gray-600">© 2026 Xiamen Union Spares Ltd. All rights reserved.</p>
+          <div className="flex gap-6 text-xs text-gray-600">
+            <span className="hover:text-gray-400 cursor-pointer transition-colors">Privacy Policy</span>
+            <span className="hover:text-gray-400 cursor-pointer transition-colors">Terms of Service</span>
+            <span className="hover:text-gray-400 cursor-pointer transition-colors">Site Map</span>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   )

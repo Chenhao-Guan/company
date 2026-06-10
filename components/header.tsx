@@ -1,33 +1,37 @@
 "use client"
 
 import { useState, useEffect, useCallback, memo } from "react"
-import { motion } from "framer-motion"
 import Image from "next/image"
 import { useRouter, usePathname } from "next/navigation"
+import { Menu, X } from "lucide-react"
 import { throttle } from "@/lib/performance"
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
 
-  // Memoize scroll handler with throttling for performance
   const handleScroll = useCallback(
     throttle(() => {
       setIsScrolled(window.scrollY > 50)
-    }, 100), // Update at most once every 100ms
+    }, 100),
     []
   )
 
   useEffect(() => {
-    // Use passive event listener for better scroll performance
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+  }, [pathname])
+
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "/#about" },
+    { name: "About", href: "/#about" },
     { name: "Products", href: "/products" },
     { name: "News", href: "/news" },
     { name: "Certificates", href: "/certificates" },
@@ -35,99 +39,114 @@ function Header() {
   ]
 
   const handleNavigation = (href: string) => {
+    setIsMobileMenuOpen(false)
     if (href.startsWith("/#")) {
-      // Handle anchor links
       if (pathname !== "/") {
         router.push("/")
         setTimeout(() => {
           const element = document.querySelector(href.substring(1))
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" })
-          }
+          if (element) element.scrollIntoView({ behavior: "smooth" })
         }, 100)
       } else {
         const element = document.querySelector(href.substring(1))
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" })
-        }
+        if (element) element.scrollIntoView({ behavior: "smooth" })
       }
     } else {
-      // Handle regular page navigation
       router.push(href)
     }
   }
 
   return (
-    <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-sm border-b border-[hsl(var(--border))]"
+          : "bg-transparent"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
       role="banner"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <motion.div
-            className="flex items-center space-x-3 cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          <button
+            className="flex items-center gap-3"
             onClick={() => router.push("/")}
-            role="link"
-            tabIndex={0}
             aria-label="Xiamen Union Spares - Go to home page"
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') router.push("/")
-            }}
           >
-            <div className="w-12 h-12 flex items-center justify-center">
-              <Image
-                src="/logo.png"
-                alt="Xiamen Union Spares Logo"
-                width={40}
-                height={40}
-                priority
-              />
+            <Image
+              src="/logo.png"
+              alt="Xiamen Union Spares Logo"
+              width={32}
+              height={32}
+              priority
+            />
+            <div className="flex items-baseline gap-2">
+              <span className="text-sm font-bold tracking-wide text-[hsl(var(--foreground))]">
+                RENHE
+              </span>
+              <span className="text-xs tracking-wider hidden sm:inline text-[hsl(var(--muted-foreground))]">
+                PRECISION SPARE PARTS
+              </span>
             </div>
-            <div>
-              <h1 className={`text-xl font-bold ${isScrolled ? "text-gray-900" : "text-white"}`}>
-                Xiamen Union Spares
-              </h1>
-              <p className={`text-sm ${isScrolled ? "text-gray-600" : "text-gray-200"}`}>Industrial Parts Solutions</p>
-            </div>
-          </motion.div>
+          </button>
 
-          {/* Desktop Navigation - Always Visible */}
-          <nav className="flex items-center space-x-6" role="navigation" aria-label="Main navigation">
-            {navItems.map((item, index) => (
-              <motion.button
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center" role="navigation" aria-label="Main navigation">
+            {navItems.map((item) => (
+              <button
                 key={item.name}
                 onClick={() => handleNavigation(item.href)}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 px-3 py-2 rounded-lg ${
+                className={`px-4 py-2 text-xs font-semibold tracking-wider uppercase transition-colors ${
                   pathname === item.href || (item.href === "/" && pathname === "/")
-                    ? "bg-blue-600 text-white"
-                    : isScrolled
-                      ? "text-gray-700"
-                      : "text-white"
+                    ? "text-[hsl(var(--primary))] border-b-2 border-[hsl(var(--primary))]"
+                    : "text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]"
                 }`}
-                whileHover={{ y: -2 }}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
                 aria-label={item.name}
                 aria-current={pathname === item.href ? "page" : undefined}
               >
                 {item.name}
-              </motion.button>
+              </button>
             ))}
           </nav>
+
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2 text-[hsl(var(--foreground))]"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
-    </motion.header>
+
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <nav
+          className="md:hidden border-t border-[hsl(var(--border))] bg-white"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => handleNavigation(item.href)}
+                className={`block w-full text-left px-4 py-3 text-sm font-semibold tracking-wider uppercase transition-colors ${
+                  pathname === item.href || (item.href === "/" && pathname === "/")
+                    ? "text-[hsl(var(--primary))] bg-[hsl(var(--muted)/0.5)]"
+                    : "text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:bg-[hsl(var(--muted)/0.3)]"
+                }`}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </nav>
+      )}
+    </header>
   )
 }
 
-// Memoize component to prevent unnecessary re-renders
 export default memo(Header)

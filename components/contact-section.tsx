@@ -1,120 +1,82 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef, memo } from "react"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { memo } from "react"
 
 function ContactSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const contactItems = [
+    {
+      icon: MapPin,
+      label: "ADDRESS",
+      lines: ["Xiamen Union Spares Ltd.", "Software Park Phase II, Siming District", "Xiamen, Fujian, China"],
+    },
+    {
+      icon: Phone,
+      label: "PHONE",
+      lines: ["+86 592 1234 5678", "+86 592 8765 4321"],
+    },
+    {
+      icon: Mail,
+      label: "EMAIL",
+      lines: ["info@xiamenunion.com", "sales@xiamenunion.com"],
+    },
+    {
+      icon: Clock,
+      label: "BUSINESS HOURS",
+      lines: ["Mon–Fri: 08:00–18:00 CST", "Sat: 09:00–17:00 CST", "Sun: Closed"],
+    },
+  ]
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Contact Us</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Get in touch with our expert team for professional industrial spare parts solutions
-          </p>
-        </motion.div>
+    <section id="contact" className="py-24 bg-white relative">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-grid-fine opacity-20 pointer-events-none" />
 
-        <div className="max-w-3xl mx-auto">
-          {/* Contact Information */}
-          <motion.div
-            className="bg-white rounded-2xl shadow-xl p-8"
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
-            <p className="text-gray-600 mb-8">
-              We're here to help you find the right industrial spare parts for your needs. Contact us today for expert
-              advice and competitive pricing.
-            </p>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section header */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-8 h-px bg-[hsl(var(--primary))]" />
+          <span className="spec-label text-[hsl(var(--primary))]">CONTACT</span>
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-bold text-[hsl(var(--foreground))] mb-4 tracking-tight">
+          Get in touch.
+        </h2>
+        <p className="text-[hsl(var(--muted-foreground))] max-w-xl mb-16">
+          Our technical team is ready to help you find the right spare parts.
+          Contact us for expert advice and competitive pricing.
+        </p>
 
-            <div className="space-y-6">
-              <motion.div
-                className="flex items-start space-x-4"
-                whileHover={{ x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Address</h4>
-                  <p className="text-gray-600">
-                    Xiamen Union Spares Ltd.
-                    <br />
-                    Industrial District, Xiamen
-                    <br />
-                    Fujian Province, China
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="flex items-start space-x-4"
-                whileHover={{ x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex-shrink-0 w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Phone</h4>
-                  <p className="text-gray-600">
-                    +86 592 1234 5678
-                    <br />
-                    +86 592 8765 4321
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="flex items-start space-x-4"
-                whileHover={{ x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Email</h4>
-                  <p className="text-gray-600">
-                    info@xiamenunion.com
-                    <br />
-                    sales@xiamenunion.com
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className="flex items-start space-x-4"
-                whileHover={{ x: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex-shrink-0 w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Business Hours</h4>
-                  <p className="text-gray-600">
-                    Monday - Friday: 8:00 AM - 6:00 PM
-                    <br />
-                    Saturday: 9:00 AM - 5:00 PM
-                    <br />
-                    Sunday: Closed
-                  </p>
-                </div>
-              </motion.div>
+        {/* Contact grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 border border-[hsl(var(--border))]">
+          {contactItems.map((item, index) => (
+            <div
+              key={item.label}
+              className={`p-8 ${index % 2 === 1 ? 'border-l border-[hsl(var(--border))]' : ''} ${index >= 2 ? 'border-t border-[hsl(var(--border))]' : ''}`}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <item.icon className="w-4 h-4 text-[hsl(var(--primary))]" />
+                <span className="spec-label">{item.label}</span>
+              </div>
+              <div className="space-y-1">
+                {item.lines.map((line, i) => (
+                  <p key={i} className="text-sm text-[hsl(var(--foreground))]">{line}</p>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-12 flex items-center gap-6">
+          <a
+            href="mailto:info@xiamenunion.com"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[hsl(var(--foreground))] text-white text-xs font-semibold tracking-wider hover:bg-[hsl(var(--primary))] transition-colors"
+          >
+            SEND INQUIRY
+          </a>
+          <span className="text-xs text-[hsl(var(--muted-foreground))]">
+            Typical response within 24 hours
+          </span>
         </div>
       </div>
     </section>

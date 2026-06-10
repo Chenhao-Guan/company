@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import type { NewsItem } from "@/data/news"
 import { useState } from "react"
 import { Calendar, Clock, User } from "lucide-react"
@@ -196,20 +195,14 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
 
       {/* Image Lightbox */}
       {selectedImage && (
-        <motion.div
+        <div
           className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           onClick={() => setSelectedImage(null)}
         >
-          <motion.img
+          <img
             src={selectedImage}
             alt="Enlarged view"
             className="max-w-full max-h-full object-contain rounded-lg"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.8 }}
           />
           <button
             onClick={() => setSelectedImage(null)}
@@ -217,7 +210,7 @@ export default function NewsDetailModal({ news, onClose }: NewsDetailModalProps)
           >
             ×
           </button>
-        </motion.div>
+        </div>
       )}
     </>
   )

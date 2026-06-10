@@ -1,17 +1,13 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { memo } from "react"
 import { Calendar, ArrowRight } from "lucide-react"
 
 interface NewsSectionProps {
   onNewsSelect: (news: any) => void
 }
 
-export default function NewsSection({ onNewsSelect }: NewsSectionProps) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
+function NewsSection({ onNewsSelect }: NewsSectionProps) {
   const news = [
     {
       id: 1,
@@ -81,80 +77,76 @@ export default function NewsSection({ onNewsSelect }: NewsSectionProps) {
   ]
 
   return (
-    <section id="news" className="py-20 bg-gray-50" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">News & Updates</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Stay informed about our latest developments and industry insights, keeping up with industry trends together
-          </p>
-        </motion.div>
+    <section id="news" className="py-24 bg-[hsl(var(--background))] relative">
+      <div className="absolute inset-0 bg-grid-tech opacity-20 pointer-events-none" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {news.map((item, index) => (
-            <motion.article
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-start justify-between gap-8 mb-16">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-px bg-[hsl(var(--primary))]" />
+              <span className="spec-label text-[hsl(var(--primary))]">NEWS & UPDATES</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[hsl(var(--foreground))] mb-4 tracking-tight">
+              Latest developments.
+            </h2>
+            <p className="text-[hsl(var(--muted-foreground))] max-w-2xl">
+              Stay informed about our latest developments and industry insights, keeping up with industry trends together.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[hsl(var(--border))] border border-[hsl(var(--border))]">
+          {news.map((item) => (
+            <article
               key={item.title}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              className="group bg-white cursor-pointer hover:bg-[hsl(var(--muted)/0.5)] transition-colors"
               onClick={() => onNewsSelect(item)}
             >
-              <div className="relative overflow-hidden">
+              <div className="relative border-b border-[hsl(var(--border))] bg-[hsl(var(--muted))]">
                 <img
                   src={item.image || "/placeholder.svg"}
                   alt={item.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-60`}></div>
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-white/90 text-gray-800 text-xs font-semibold rounded-full">
+                  <span className="spec-label bg-white border border-[hsl(var(--border))] px-3 py-1 text-[hsl(var(--foreground))]">
                     {item.category}
                   </span>
                 </div>
               </div>
 
               <div className="p-6">
-                <div className="flex items-center text-sm text-gray-500 mb-3">
-                  <Calendar className="w-4 h-4 mr-2" />
+                <div className="flex items-center gap-2 spec-label mb-4">
+                  <Calendar className="w-3.5 h-3.5 text-[hsl(var(--primary))]" />
                   {item.date}
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                <h3 className="text-lg font-bold text-[hsl(var(--foreground))] mb-3 tracking-tight line-clamp-2 group-hover:text-[hsl(var(--primary))] transition-colors">
                   {item.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{item.excerpt}</p>
+                <p className="text-sm text-[hsl(var(--muted-foreground))] leading-relaxed mb-6 line-clamp-3">
+                  {item.excerpt}
+                </p>
 
-                <motion.div className="flex items-center text-blue-600 font-semibold text-sm" whileHover={{ x: 5 }}>
-                  Read More <ArrowRight className="w-4 h-4 ml-2" />
-                </motion.div>
+                <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-[hsl(var(--muted-foreground))] group-hover:text-[hsl(var(--primary))] transition-colors">
+                  READ MORE
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
 
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <motion.button
-            className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View More News
-          </motion.button>
-        </motion.div>
+        <div className="mt-12 text-center">
+          <button className="px-6 py-3 bg-[hsl(var(--foreground))] text-white text-xs font-semibold tracking-wider hover:bg-[hsl(var(--primary))] transition-colors">
+            VIEW MORE NEWS
+          </button>
+        </div>
       </div>
     </section>
   )
 }
+
+export default memo(NewsSection)
